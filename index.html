@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excellent Learning Center - Plataforma de Capacitación</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <h2 class="logo">ELC</h2>
+            <button class="menu-toggle" id="menuToggle">☰</button>
+        </div>
+        <ul class="nav-menu">
+            <li><a href="#" data-section="home" class="nav-link active">🏠 Home</a></li>
+            <li><a href="#" data-section="cursos" class="nav-link">📚 Cursos</a></li>
+            <li><a href="#" data-section="especialistas" class="nav-link">👨‍💼 Especialistas</a></li>
+            <li><a href="#" data-section="calendario" class="nav-link">📅 Calendario</a></li>
+            <li><a href="#" data-section="habilidades" class="nav-link">🎯 Habilidades</a></li>
+            <li><a href="#" data-section="evaluaciones" class="nav-link">📊 Evaluaciones</a></li>
+            <li><a href="#" data-section="documentacion" class="nav-link">📄 Documentación</a></li>
+            <li><a href="#" data-section="pte" class="nav-link">✓ PTE</a></li>
+            <li><a href="#" data-section="perfil" class="nav-link">⚙️ Perfil</a></li>
+        </ul>
+        <div class="sidebar-footer">
+            <p>Excellent Learning Center</p>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-left">
+                <h1>Excellent Learning Center</h1>
+                <p class="subtitle">Plataforma de Capacitación Técnica</p>
+            </div>
+            <div class="header-right">
+                <input type="text" id="searchInput" class="search-box" placeholder="Buscar...">
+                <div class="user-avatar">👤</div>
+            </div>
+        </header>
+
+        <!-- Loading Indicator -->
+        <div id="loading" class="loading-spinner" style="display: none;">
+            <div class="spinner"></div>
+            <p>Cargando datos...</p>
+        </div>
+
+        <!-- Home Section -->
+        <section id="home" class="content-section active">
+            <div class="hero-banner">
+                <h2>Bienvenido a Excellent Learning Center</h2>
+                <p>Tu plataforma integral de capacitación técnica industrial</p>
+            </div>
+            <div class="dashboard-grid">
+                <div class="stat-card">
+                    <h3>Cursos Disponibles</h3>
+                    <p class="stat-number" id="cursosCount">0</p>
+                    <p class="stat-label">Capacitaciones activas</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Especialistas</h3>
+                    <p class="stat-number" id="especialistasCount">0</p>
+                    <p class="stat-label">Instructores certificados</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Mi Progreso</h3>
+                    <div class="progress-bar" id="progressBar">
+                        <div class="progress-fill" style="width: 65%"></div>
+                    </div>
+                    <p class="stat-label">65% completado</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Certificaciones</h3>
+                    <p class="stat-number" id="certificacionesCount">0</p>
+                    <p class="stat-label">Cursos completados</p>
+                </div>
+            </div>
+
+            <h3 class="section-title">Cursos Recomendados</h3>
+            <div id="homeCoursesContainer" class="courses-grid">
+                <!-- Populated by JS -->
+            </div>
+        </section>
+
+        <!-- Cursos Section -->
+        <section id="cursos" class="content-section">
+            <h2>Catálogo de Cursos</h2>
+            <div class="filters">
+                <input type="text" id="cursosSearch" placeholder="Buscar cursos..." class="filter-input">
+                <select id="nivelFilter" class="filter-select">
+                    <option value="">Todos los niveles</option>
+                    <option value="Básico">Básico</option>
+                    <option value="Intermedio">Intermedio</option>
+                    <option value="Avanzado">Avanzado</option>
+                </select>
+                <select id="modalidadFilter" class="filter-select">
+                    <option value="">Todas las modalidades</option>
+                    <option value="Presencial">Presencial</option>
+                    <option value="Virtual">Virtual</option>
+                    <option value="Híbrida">Híbrida</option>
+                </select>
+            </div>
+            <div id="cursosContainer" class="courses-grid">
+                <!-- Populated by JS -->
+            </div>
+        </section>
+
+        <!-- Especialistas Section -->
+        <section id="especialistas" class="content-section">
+            <h2>Especialistas por Área</h2>
+            <div class="filters">
+                <input type="text" id="especialistasSearch" placeholder="Buscar especialista..." class="filter-input">
+                <select id="areaFilter" class="filter-select">
+                    <option value="">Todas las áreas</option>
+                    <option value="Cervecería">Cervecería</option>
+                    <option value="Mantenimiento">Mantenimiento</option>
+                    <option value="Operación">Operación</option>
+                    <option value="Calidad">Calidad</option>
+                </select>
+            </div>
+            <div id="especialistasContainer" class="specialists-grid">
+                <!-- Populated by JS -->
+            </div>
+        </section>
+
+        <!-- Calendario Section -->
+        <section id="calendario" class="content-section">
+            <h2>Calendario - Sala Excellent</h2>
+            <div class="calendar-container">
+                <div class="calendar-header">
+                    <button id="prevMonth">←</button>
+                    <h3 id="currentMonth">Diciembre 2024</h3>
+                    <button id="nextMonth">→</button>
+                </div>
+                <div id="calendar" class="calendar-grid">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+            <div id="calendarEvents" class="calendar-events">
+                <h3>Eventos del Día</h3>
+                <div id="eventsList">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Habilidades Section -->
+        <section id="habilidades" class="content-section">
+            <h2>Matriz de Habilidades</h2>
+            <div class="filters">
+                <select id="areaHabilidadesFilter" class="filter-select">
+                    <option value="">Todas las áreas</option>
+                    <option value="Cervecería">Cervecería</option>
+                    <option value="Mantenimiento">Mantenimiento</option>
+                    <option value="Operación">Operación</option>
+                </select>
+            </div>
+            <div id="habilidadesContainer" class="habilidades-table">
+                <!-- Populated by JS -->
+            </div>
+        </section>
+
+        <!-- Evaluaciones Section -->
+        <section id="evaluaciones" class="content-section">
+            <h2>Evaluaciones y Certificaciones</h2>
+            <div id="evaluacionesContainer" class="evaluaciones-grid">
+                <!-- Populated by JS -->
+            </div>
+        </section>
+
+        <!-- Documentación Section -->
+        <section id="documentacion" class="content-section">
+            <h2>Documentación Técnica</h2>
+            <div class="filters">
+                <select id="docTypeFilter" class="filter-select">
+                    <option value="">Todos los tipos</option>
+                    <option value="SOP">SOP (Procedimiento Operativo)</option>
+                    <option value="OWD">OWD (Instrucción de Trabajo)</option>
+                </select>
+            </div>
+            <div id="documentacionContainer" class="docs-grid">
+                <!-- Populated by JS -->
+            </div>
+        </section>
+
+        <!-- PTE Section -->
+        <section id="pte" class="content-section">
+            <h2>PTE - Plan Técnico de Integración</h2>
+            <div id="pteContainer" class="pte-container">
+                <!-- Populated by JS -->
+            </div>
+        </section>
+
+        <!-- Perfil Section -->
+        <section id="perfil" class="content-section">
+            <h2>Mi Perfil</h2>
+            <div class="profile-container">
+                <div class="profile-header">
+                    <div class="profile-avatar">👤</div>
+                    <div class="profile-info">
+                        <input type="text" id="userName" placeholder="Tu nombre" class="profile-input">
+                        <input type="email" id="userEmail" placeholder="tu@email.com" class="profile-input">
+                        <input type="text" id="userArea" placeholder="Tu área" class="profile-input">
+                    </div>
+                </div>
+                <div class="profile-section">
+                    <h3>Preferencias</h3>
+                    <label>
+                        <input type="checkbox" id="notificaciones"> Recibir notificaciones
+                    </label>
+                    <label>
+                        <input type="checkbox" id="newsletter"> Recibir boletín informativo
+                    </label>
+                </div>
+                <button id="saveProfile" class="btn-primary">Guardar Cambios</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal for Details -->
+    <div id="detailsModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <div id="modalBody">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
