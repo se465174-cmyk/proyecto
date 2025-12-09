@@ -4,233 +4,1260 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Excellent Learning Center - Plataforma de Capacitación</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        :root {
+            --primary-cyan: #00D9FF;
+            --primary-lime: #32FF00;
+            --primary-orange: #FF6B35;
+            --light-gray: #F5F7FA;
+            --white: #FFFFFF;
+            --text-dark: #1A1A2E;
+            --text-light: #6C757D;
+            --border-color: #E0E0E0;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --danger: #EF4444;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light-gray);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 270px;
+            height: 100vh;
+            background: linear-gradient(135deg, #1A1A2E 0%, #16213E 100%);
+            color: white;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            z-index: 1000;
+            box-shadow: 4px 0 15px rgba(0, 0, 0, 0.2);
+            overflow-y: auto;
+        }
+
+        .sidebar-header {
+            padding: 25px 20px;
+            border-bottom: 2px solid var(--primary-cyan);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-cyan);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .nav-menu {
+            list-style: none;
+            flex: 1;
+            padding: 15px 0;
+        }
+
+        .nav-menu li {
+            margin: 0;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 15px 20px;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: var(--transition);
+            border-left: 4px solid transparent;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background-color: rgba(0, 217, 255, 0.1);
+            color: white;
+            border-left-color: var(--primary-cyan);
+            padding-left: 22px;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 270px;
+            min-height: 100vh;
+            background-color: var(--light-gray);
+        }
+
+        .header {
+            background: white;
+            padding: 25px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            color: var(--text-dark);
+            font-weight: 700;
+        }
+
+        .header-right {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .search-box {
+            padding: 12px 18px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            width: 280px;
+            font-size: 14px;
+            transition: var(--transition);
+            background: white;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: var(--primary-cyan);
+            box-shadow: 0 0 0 3px rgba(0, 217, 255, 0.1);
+        }
+
+        /* Content Section */
+        .content-section {
+            display: none;
+            padding: 40px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-title {
+            font-size: 32px;
+            color: var(--text-dark);
+            margin-bottom: 30px;
+            font-weight: 700;
+            border-bottom: 3px solid var(--primary-lime);
+            padding-bottom: 15px;
+        }
+
+        /* Grid Systems */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        /* Stat Card */
+        .stat-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border-top: 4px solid var(--primary-cyan);
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .stat-number {
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--primary-orange);
+            margin-bottom: 10px;
+        }
+
+        .stat-subtext {
+            font-size: 12px;
+            color: var(--text-light);
+        }
+
+        /* Card */
+        .card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-cyan) 0%, var(--primary-lime) 100%);
+            color: var(--text-dark);
+            padding: 20px;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .card-body {
+            padding: 25px;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+
+        .card-subtitle {
+            font-size: 13px;
+            color: var(--text-light);
+            margin-bottom: 15px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-right: 8px;
+            margin-bottom: 10px;
+        }
+
+        .badge-cyan {
+            background: rgba(0, 217, 255, 0.2);
+            color: #0099CC;
+        }
+
+        .badge-lime {
+            background: rgba(50, 255, 0, 0.2);
+            color: #22AA00;
+        }
+
+        .badge-orange {
+            background: rgba(255, 107, 53, 0.2);
+            color: var(--primary-orange);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 12px 28px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-block;
+            text-decoration: none;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: var(--primary-cyan);
+            color: var(--text-dark);
+        }
+
+        .btn-primary:hover {
+            background: #00BBDD;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 217, 255, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--primary-lime);
+            color: var(--text-dark);
+        }
+
+        .btn-secondary:hover {
+            background: #28DD00;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(50, 255, 0, 0.3);
+        }
+
+        .btn-tertiary {
+            background: var(--primary-orange);
+            color: white;
+        }
+
+        .btn-tertiary:hover {
+            background: #FF5220;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 12px;
+        }
+
+        /* Forms */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 14px;
+            transition: var(--transition);
+            font-family: inherit;
+            background: white;
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary-cyan);
+            box-shadow: 0 0 0 3px rgba(0, 217, 255, 0.1);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 3000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 40px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 28px;
+            color: var(--text-light);
+            cursor: pointer;
+            background: none;
+            border: none;
+            transition: var(--transition);
+        }
+
+        .modal-close:hover {
+            color: var(--text-dark);
+            transform: rotate(90deg);
+        }
+
+        .modal-title {
+            font-size: 24px;
+            color: var(--text-dark);
+            margin-bottom: 25px;
+            font-weight: 700;
+            border-bottom: 2px solid var(--primary-lime);
+            padding-bottom: 15px;
+        }
+
+        /* Recognition Badge */
+        .trophy-card {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            padding: 40px 30px;
+            border-radius: 12px;
+            text-align: center;
+            color: var(--text-dark);
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .trophy-card::before {
+            content: '🏆';
+            font-size: 60px;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .trophy-rank {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .trophy-name {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .trophy-courses {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        /* Table */
+        .table-container {
+            background: white;
+            border-radius: 12px;
+            overflow: auto;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: linear-gradient(135deg, var(--primary-cyan) 0%, var(--primary-lime) 100%);
+            color: var(--text-dark);
+            padding: 18px;
+            text-align: left;
+            font-weight: 700;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 15px 18px;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 14px;
+        }
+
+        tr:hover {
+            background-color: var(--light-gray);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .header-right {
+                width: 100%;
+                flex-direction: column;
+            }
+
+            .search-box {
+                width: 100%;
+            }
+
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content {
+                width: 95%;
+                max-height: 90vh;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Sidebar Navigation -->
-    <nav class="sidebar">
+    <!-- Sidebar -->
+    <aside class="sidebar">
         <div class="sidebar-header">
-            <h2 class="logo">ELC</h2>
-            <button class="menu-toggle" id="menuToggle">☰</button>
+            <div class="logo">ELC</div>
         </div>
         <ul class="nav-menu">
-            <li><a href="#" data-section="home" class="nav-link active">🏠 Home</a></li>
-            <li><a href="#" data-section="cursos" class="nav-link">📚 Cursos</a></li>
-            <li><a href="#" data-section="especialistas" class="nav-link">👨‍💼 Especialistas</a></li>
-            <li><a href="#" data-section="calendario" class="nav-link">📅 Calendario</a></li>
-            <li><a href="#" data-section="habilidades" class="nav-link">🎯 Habilidades</a></li>
-            <li><a href="#" data-section="evaluaciones" class="nav-link">📊 Evaluaciones</a></li>
-            <li><a href="#" data-section="documentacion" class="nav-link">📄 Documentación</a></li>
-            <li><a href="#" data-section="pte" class="nav-link">✓ PTE</a></li>
-            <li><a href="#" data-section="perfil" class="nav-link">⚙️ Perfil</a></li>
+            <li><a href="#" class="nav-link active" data-section="home">📊 Dashboard</a></li>
+            <li><a href="#" class="nav-link" data-section="cursos">📚 Cursos</a></li>
+            <li><a href="#" class="nav-link" data-section="agregar-curso">➕ Agregar Curso</a></li>
+            <li><a href="#" class="nav-link" data-section="proponer-curso">✍️ Proponer Curso</a></li>
+            <li><a href="#" class="nav-link" data-section="expertos">👨‍🏫 Expertos</a></li>
+            <li><a href="#" class="nav-link" data-section="personas">👥 Personas</a></li>
+            <li><a href="#" class="nav-link" data-section="agregar-persona">➕ Agregar Persona</a></li>
+            <li><a href="#" class="nav-link" data-section="top-participantes">🌟 Top Participantes</a></li>
+            <li><a href="#" class="nav-link" data-section="mis-postulaciones">📋 Mis Postulaciones</a></li>
         </ul>
-        <div class="sidebar-footer">
-            <p>Excellent Learning Center</p>
-        </div>
-    </nav>
+    </aside>
 
     <!-- Main Content -->
-    <main class="main-content">
+    <div class="main-content">
         <!-- Header -->
-        <header class="header">
-            <div class="header-left">
-                <h1>Excellent Learning Center</h1>
-                <p class="subtitle">Plataforma de Capacitación Técnica</p>
-            </div>
+        <div class="header">
+            <h1>Excellent Learning Center</h1>
             <div class="header-right">
-                <input type="text" id="searchInput" class="search-box" placeholder="Buscar...">
-                <div class="user-avatar">👤</div>
+                <input type="text" class="search-box" id="searchBox" placeholder="Buscar...">
             </div>
-        </header>
-
-        <!-- Loading Indicator -->
-        <div id="loading" class="loading-spinner" style="display: none;">
-            <div class="spinner"></div>
-            <p>Cargando datos...</p>
         </div>
 
-        <!-- Home Section -->
-        <section id="home" class="content-section active">
-            <div class="hero-banner">
-                <h2>Bienvenido a Excellent Learning Center</h2>
-                <p>Tu plataforma integral de capacitación técnica industrial</p>
-            </div>
-            <div class="dashboard-grid">
+        <!-- Dashboard Section -->
+        <div id="home" class="content-section active">
+            <h2 class="section-title">📊 Dashboard</h2>
+            
+            <div class="grid-2">
                 <div class="stat-card">
-                    <h3>Cursos Disponibles</h3>
-                    <p class="stat-number" id="cursosCount">0</p>
-                    <p class="stat-label">Capacitaciones activas</p>
+                    <div class="stat-label">Total de Cursos</div>
+                    <div class="stat-number" id="totalCursos">0</div>
+                    <div class="stat-subtext">Disponibles en plataforma</div>
                 </div>
                 <div class="stat-card">
-                    <h3>Especialistas</h3>
-                    <p class="stat-number" id="especialistasCount">0</p>
-                    <p class="stat-label">Instructores certificados</p>
+                    <div class="stat-label">Total de Personas</div>
+                    <div class="stat-number" id="totalPersonas">0</div>
+                    <div class="stat-subtext">Registradas en el sistema</div>
                 </div>
                 <div class="stat-card">
-                    <h3>Mi Progreso</h3>
-                    <div class="progress-bar" id="progressBar">
-                        <div class="progress-fill" style="width: 65%"></div>
-                    </div>
-                    <p class="stat-label">65% completado</p>
+                    <div class="stat-label">Total de Expertos</div>
+                    <div class="stat-number" id="totalExpertos">0</div>
+                    <div class="stat-subtext">Instructores disponibles</div>
                 </div>
                 <div class="stat-card">
-                    <h3>Certificaciones</h3>
-                    <p class="stat-number" id="certificacionesCount">0</p>
-                    <p class="stat-label">Cursos completados</p>
+                    <div class="stat-label">Postulaciones Activas</div>
+                    <div class="stat-number" id="totalPostulaciones">0</div>
+                    <div class="stat-subtext">En revisión</div>
                 </div>
             </div>
-
-            <h3 class="section-title">Cursos Recomendados</h3>
-            <div id="homeCoursesContainer" class="courses-grid">
-                <!-- Populated by JS -->
-            </div>
-        </section>
+        </div>
 
         <!-- Cursos Section -->
-        <section id="cursos" class="content-section">
-            <h2>Catálogo de Cursos</h2>
-            <div class="filters">
-                <input type="text" id="cursosSearch" placeholder="Buscar cursos..." class="filter-input">
-                <select id="nivelFilter" class="filter-select">
-                    <option value="">Todos los niveles</option>
-                    <option value="Básico">Básico</option>
-                    <option value="Intermedio">Intermedio</option>
-                    <option value="Avanzado">Avanzado</option>
-                </select>
-                <select id="modalidadFilter" class="filter-select">
-                    <option value="">Todas las modalidades</option>
-                    <option value="Presencial">Presencial</option>
-                    <option value="Virtual">Virtual</option>
-                    <option value="Híbrida">Híbrida</option>
-                </select>
-            </div>
-            <div id="cursosContainer" class="courses-grid">
-                <!-- Populated by JS -->
-            </div>
-        </section>
+        <div id="cursos" class="content-section">
+            <h2 class="section-title">📚 Catálogo de Cursos</h2>
+            <div id="cursosContainer" class="grid-3"></div>
+        </div>
 
-        <!-- Especialistas Section -->
-        <section id="especialistas" class="content-section">
-            <h2>Especialistas por Área</h2>
-            <div class="filters">
-                <input type="text" id="especialistasSearch" placeholder="Buscar especialista..." class="filter-input">
-                <select id="areaFilter" class="filter-select">
-                    <option value="">Todas las áreas</option>
-                    <option value="Cervecería">Cervecería</option>
-                    <option value="Mantenimiento">Mantenimiento</option>
-                    <option value="Operación">Operación</option>
-                    <option value="Calidad">Calidad</option>
-                </select>
-            </div>
-            <div id="especialistasContainer" class="specialists-grid">
-                <!-- Populated by JS -->
-            </div>
-        </section>
-
-        <!-- Calendario Section -->
-        <section id="calendario" class="content-section">
-            <h2>Calendario - Sala Excellent</h2>
-            <div class="calendar-container">
-                <div class="calendar-header">
-                    <button id="prevMonth">←</button>
-                    <h3 id="currentMonth">Diciembre 2024</h3>
-                    <button id="nextMonth">→</button>
-                </div>
-                <div id="calendar" class="calendar-grid">
-                    <!-- Populated by JS -->
-                </div>
-            </div>
-            <div id="calendarEvents" class="calendar-events">
-                <h3>Eventos del Día</h3>
-                <div id="eventsList">
-                    <!-- Populated by JS -->
-                </div>
-            </div>
-        </section>
-
-        <!-- Habilidades Section -->
-        <section id="habilidades" class="content-section">
-            <h2>Matriz de Habilidades</h2>
-            <div class="filters">
-                <select id="areaHabilidadesFilter" class="filter-select">
-                    <option value="">Todas las áreas</option>
-                    <option value="Cervecería">Cervecería</option>
-                    <option value="Mantenimiento">Mantenimiento</option>
-                    <option value="Operación">Operación</option>
-                </select>
-            </div>
-            <div id="habilidadesContainer" class="habilidades-table">
-                <!-- Populated by JS -->
-            </div>
-        </section>
-
-        <!-- Evaluaciones Section -->
-        <section id="evaluaciones" class="content-section">
-            <h2>Evaluaciones y Certificaciones</h2>
-            <div id="evaluacionesContainer" class="evaluaciones-grid">
-                <!-- Populated by JS -->
-            </div>
-        </section>
-
-        <!-- Documentación Section -->
-        <section id="documentacion" class="content-section">
-            <h2>Documentación Técnica</h2>
-            <div class="filters">
-                <select id="docTypeFilter" class="filter-select">
-                    <option value="">Todos los tipos</option>
-                    <option value="SOP">SOP (Procedimiento Operativo)</option>
-                    <option value="OWD">OWD (Instrucción de Trabajo)</option>
-                </select>
-            </div>
-            <div id="documentacionContainer" class="docs-grid">
-                <!-- Populated by JS -->
-            </div>
-        </section>
-
-        <!-- PTE Section -->
-        <section id="pte" class="content-section">
-            <h2>PTE - Plan Técnico de Integración</h2>
-            <div id="pteContainer" class="pte-container">
-                <!-- Populated by JS -->
-            </div>
-        </section>
-
-        <!-- Perfil Section -->
-        <section id="perfil" class="content-section">
-            <h2>Mi Perfil</h2>
-            <div class="profile-container">
-                <div class="profile-header">
-                    <div class="profile-avatar">👤</div>
-                    <div class="profile-info">
-                        <input type="text" id="userName" placeholder="Tu nombre" class="profile-input">
-                        <input type="email" id="userEmail" placeholder="tu@email.com" class="profile-input">
-                        <input type="text" id="userArea" placeholder="Tu área" class="profile-input">
+        <!-- Agregar Curso Section -->
+        <div id="agregar-curso" class="content-section">
+            <h2 class="section-title">➕ Agregar Nuevo Curso</h2>
+            <div style="background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); max-width: 600px;">
+                <form id="formAgregarCurso">
+                    <div class="form-group">
+                        <label class="form-label">Nombre del Curso</label>
+                        <input type="text" class="form-input" required>
                     </div>
-                </div>
-                <div class="profile-section">
-                    <h3>Preferencias</h3>
-                    <label>
-                        <input type="checkbox" id="notificaciones"> Recibir notificaciones
-                    </label>
-                    <label>
-                        <input type="checkbox" id="newsletter"> Recibir boletín informativo
-                    </label>
-                </div>
-                <button id="saveProfile" class="btn-primary">Guardar Cambios</button>
+                    <div class="form-group">
+                        <label class="form-label">Descripción</label>
+                        <textarea class="form-textarea" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Nivel</label>
+                        <select class="form-select" required>
+                            <option value="">Seleccionar nivel</option>
+                            <option value="Básico">Básico</option>
+                            <option value="Intermedio">Intermedio</option>
+                            <option value="Avanzado">Avanzado</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Duración (horas)</label>
+                        <input type="number" class="form-input" min="1" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Agregar Curso</button>
+                </form>
             </div>
-        </section>
-    </main>
+        </div>
 
-    <!-- Modal for Details -->
-    <div id="detailsModal" class="modal">
-        <div class="modal-content">
-            <span class="modal-close">&times;</span>
-            <div id="modalBody">
-                <!-- Populated by JS -->
+        <!-- Proponer Curso Section -->
+        <div id="proponer-curso" class="content-section">
+            <h2 class="section-title">✍️ Proponer Nuevo Curso</h2>
+            <div style="background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); max-width: 600px;">
+                <form id="formProponerCurso">
+                    <div class="form-group">
+                        <label class="form-label">Tu Nombre</label>
+                        <input type="text" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Tu SAP (Número de Trabajador)</label>
+                        <input type="text" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Nombre del Curso Propuesto</label>
+                        <input type="text" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Descripción y Justificación</label>
+                        <textarea class="form-textarea" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Nivel Sugerido</label>
+                        <select class="form-select" required>
+                            <option value="">Seleccionar nivel</option>
+                            <option value="Básico">Básico</option>
+                            <option value="Intermedio">Intermedio</option>
+                            <option value="Avanzado">Avanzado</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-secondary">Enviar Propuesta</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Expertos Section -->
+        <div id="expertos" class="content-section">
+            <h2 class="section-title">👨‍🏫 Expertos e Instructores</h2>
+            <button class="btn btn-tertiary" style="margin-bottom: 30px;" onclick="openModal('modalExpertosRegistro')">Registrarse como Experto</button>
+            <div id="expertosContainer" class="grid-3"></div>
+        </div>
+
+        <!-- Personas Section -->
+        <div id="personas" class="content-section">
+            <h2 class="section-title">👥 Personas Registradas</h2>
+            <div class="table-container">
+                <table id="tablaPeople">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>SAP</th>
+                            <th>Área</th>
+                            <th>Cursos Completados</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaPeopleBody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Agregar Persona Section -->
+        <div id="agregar-persona" class="content-section">
+            <h2 class="section-title">➕ Agregar Nueva Persona</h2>
+            <div style="background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); max-width: 600px;">
+                <form id="formAgregarPersona">
+                    <div class="form-group">
+                        <label class="form-label">Nombre Completo</label>
+                        <input type="text" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">SAP (Número de Trabajador)</label>
+                        <input type="text" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Área/Departamento</label>
+                        <select class="form-select" required>
+                            <option value="">Seleccionar área</option>
+                            <option value="Producción">Producción</option>
+                            <option value="Mantenimiento">Mantenimiento</option>
+                            <option value="Calidad">Calidad</option>
+                            <option value="Seguridad">Seguridad</option>
+                            <option value="Administración">Administración</option>
+                            <option value="Logística">Logística</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-input" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Agregar Persona</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Top Participantes Section -->
+        <div id="top-participantes" class="content-section">
+            <h2 class="section-title">🌟 Top Participantes - Reconocimientos</h2>
+            <div id="topParticipantesContainer" class="grid-3"></div>
+        </div>
+
+        <!-- Mis Postulaciones Section -->
+        <div id="mis-postulaciones" class="content-section">
+            <h2 class="section-title">📋 Mis Postulaciones a Cursos</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Curso</th>
+                            <th>Nombre</th>
+                            <th>SAP</th>
+                            <th>Fecha Postulación</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaMisPostulaciones">
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <!-- Modal - Postularse a Curso -->
+    <div id="modalPostularse" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('modalPostularse')">✕</button>
+            <h3 class="modal-title">Postularse al Curso</h3>
+            <form id="formPostularse">
+                <input type="hidden" id="cursoIdPostularse">
+                <div class="form-group">
+                    <label class="form-label">Tu Nombre</label>
+                    <input type="text" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Tu SAP (Número de Trabajador)</label>
+                    <input type="text" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Tu Área/Departamento</label>
+                    <input type="text" class="form-input" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Enviar Postulación</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal - Registro Expertos -->
+    <div id="modalExpertosRegistro" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('modalExpertosRegistro')">✕</button>
+            <h3 class="modal-title">Registrarse como Experto</h3>
+            <form id="formRegistroExperto">
+                <div class="form-group">
+                    <label class="form-label">Nombre Completo</label>
+                    <input type="text" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Especialidad/Área</label>
+                    <input type="text" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Descripción de Experiencia</label>
+                    <textarea class="form-textarea" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email de Contacto</label>
+                    <input type="email" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Agregar Fecha Disponible (Formato: YYYY-MM-DD)</label>
+                    <input type="date" class="form-input" required>
+                </div>
+                <button type="submit" class="btn btn-secondary">Registrarse</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal - Ver Detalles Curso -->
+    <div id="modalCursoDetalles" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('modalCursoDetalles')">✕</button>
+            <h3 class="modal-title" id="modalCursoTitulo"></h3>
+            <div id="modalCursoContenido"></div>
+            <button class="btn btn-primary" style="margin-top: 20px; width: 100%;" onclick="handlePostularse()">Postularme al Curso</button>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // ==================== DATA MANAGEMENT ====================
+        const API_URL = 'https://script.google.com/macros/d/{YOUR_DEPLOYMENT_ID}/usercopy';
+
+        class DataManager {
+            constructor() {
+                this.cursos = [];
+                this.personas = [];
+                this.expertos = [];
+                this.postulaciones = [];
+                this.propostasCursos = [];
+                this.loadData();
+            }
+
+            loadData() {
+                // Simulated data loading - replace with actual API calls
+                this.loadCursosData();
+                this.loadPersonasData();
+                this.loadExpertosData();
+                this.loadPostulacionesData();
+            }
+
+            loadCursosData() {
+                // Data will be fetched from Google Sheets
+                fetch(`${API_URL}?action=getCursos`)
+                    .then(res => res.json())
+                    .then(data => {
+                        this.cursos = data || [];
+                        this.updateDashboard();
+                    })
+                    .catch(() => {
+                        console.log('[v0] Using sample data for cursos');
+                        this.cursos = this.getSampleCursos();
+                        this.updateDashboard();
+                    });
+            }
+
+            loadPersonasData() {
+                fetch(`${API_URL}?action=getPersonas`)
+                    .then(res => res.json())
+                    .then(data => {
+                        this.personas = data || [];
+                        this.updateDashboard();
+                    })
+                    .catch(() => {
+                        this.personas = this.getSamplePersonas();
+                        this.updateDashboard();
+                    });
+            }
+
+            loadExpertosData() {
+                fetch(`${API_URL}?action=getExpertos`)
+                    .then(res => res.json())
+                    .then(data => {
+                        this.expertos = data || [];
+                        this.updateDashboard();
+                    })
+                    .catch(() => {
+                        this.expertos = this.getSampleExpertos();
+                        this.updateDashboard();
+                    });
+            }
+
+            loadPostulacionesData() {
+                fetch(`${API_URL}?action=getPostulaciones`)
+                    .then(res => res.json())
+                    .then(data => {
+                        this.postulaciones = data || [];
+                    })
+                    .catch(() => {
+                        this.postulaciones = [];
+                    });
+            }
+
+            addCurso(cursoData) {
+                fetch(API_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        action: 'addCurso',
+                        data: cursoData
+                    })
+                })
+                .then(() => {
+                    this.loadCursosData();
+                    alert('Curso agregado exitosamente');
+                })
+                .catch(err => {
+                    console.error('[v0] Error adding curso:', err);
+                    alert('Error al agregar el curso');
+                });
+            }
+
+            addPersona(personaData) {
+                fetch(API_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        action: 'addPersona',
+                        data: personaData
+                    })
+                })
+                .then(() => {
+                    this.loadPersonasData();
+                    alert('Persona agregada exitosamente');
+                })
+                .catch(err => {
+                    console.error('[v0] Error adding persona:', err);
+                    alert('Error al agregar la persona');
+                });
+            }
+
+            addExperto(expertoData) {
+                fetch(API_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        action: 'addExperto',
+                        data: expertoData
+                    })
+                })
+                .then(() => {
+                    this.loadExpertosData();
+                    alert('Experto registrado exitosamente');
+                })
+                .catch(err => {
+                    console.error('[v0] Error registering experto:', err);
+                    alert('Error al registrar el experto');
+                });
+            }
+
+            addPostulacion(postulacionData) {
+                fetch(API_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        action: 'addPostulacion',
+                        data: postulacionData
+                    })
+                })
+                .then(() => {
+                    this.loadPostulacionesData();
+                    alert('Postulación enviada exitosamente');
+                })
+                .catch(err => {
+                    console.error('[v0] Error adding postulacion:', err);
+                    alert('Error al enviar la postulación');
+                });
+            }
+
+            addPropostaCurso(proposteData) {
+                fetch(API_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        action: 'addPropostaCurso',
+                        data: proposteData
+                    })
+                })
+                .then(() => {
+                    alert('Propuesta de curso enviada exitosamente');
+                })
+                .catch(err => {
+                    console.error('[v0] Error adding proposta:', err);
+                    alert('Error al enviar la propuesta');
+                });
+            }
+
+            updateDashboard() {
+                document.getElementById('totalCursos').textContent = this.cursos.length;
+                document.getElementById('totalPersonas').textContent = this.personas.length;
+                document.getElementById('totalExpertos').textContent = this.expertos.length;
+                document.getElementById('totalPostulaciones').textContent = this.postulaciones.length;
+            }
+
+            getSampleCursos() {
+                return [
+                    { id: 1, nombre: 'Python Básico', nivel: 'Básico', duracion: 40, descripcion: 'Introducción a la programación en Python', area: 'Programación' },
+                    { id: 2, nombre: 'Seguridad Industrial', nivel: 'Intermedio', duracion: 20, descripcion: 'Protocolos y procedimientos de seguridad', area: 'Seguridad' },
+                    { id: 3, nombre: 'Liderazgo Efectivo', nivel: 'Avanzado', duracion: 30, descripcion: 'Desarrollo de habilidades de liderazgo', area: 'RH' }
+                ];
+            }
+
+            getSamplePersonas() {
+                return [
+                    { id: 1, nombre: 'Juan Pérez', sap: '12345', area: 'Producción', email: 'juan@example.com', cursosCompletados: 5 },
+                    { id: 2, nombre: 'María García', sap: '12346', area: 'Calidad', email: 'maria@example.com', cursosCompletados: 8 },
+                    { id: 3, nombre: 'Carlos López', sap: '12347', area: 'Mantenimiento', email: 'carlos@example.com', cursosCompletados: 3 }
+                ];
+            }
+
+            getSampleExpertos() {
+                return [
+                    { id: 1, nombre: 'Dr. Raúl Martínez', especialidad: 'Python & Programación', experiencia: '15 años', email: 'raul@example.com', fechasDisponibles: ['2025-01-15', '2025-01-22'] },
+                    { id: 2, nombre: 'Ing. Sofia Rodríguez', especialidad: 'Seguridad Industrial', experiencia: '12 años', email: 'sofia@example.com', fechasDisponibles: ['2025-01-17'] }
+                ];
+            }
+        }
+
+        const dataManager = new DataManager();
+
+        // ==================== UI FUNCTIONS ====================
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        function showSection(sectionId) {
+            document.querySelectorAll('.content-section').forEach(sec => sec.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+            
+            document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+            document.querySelector(`[data-section="${sectionId}"]`).classList.add('active');
+
+            // Render section-specific content
+            if (sectionId === 'cursos') renderCursos();
+            if (sectionId === 'personas') renderPersonas();
+            if (sectionId === 'expertos') renderExpertos();
+            if (sectionId === 'top-participantes') renderTopParticipantes();
+            if (sectionId === 'mis-postulaciones') renderMisPostulaciones();
+        }
+
+        function renderCursos() {
+            const container = document.getElementById('cursosContainer');
+            container.innerHTML = dataManager.cursos.map(curso => `
+                <div class="card">
+                    <div class="card-header">${curso.nombre}</div>
+                    <div class="card-body">
+                        <p class="card-subtitle">${curso.descripcion}</p>
+                        <div>
+                            <span class="badge badge-cyan">Nivel: ${curso.nivel}</span>
+                            <span class="badge badge-orange">${curso.duracion} horas</span>
+                        </div>
+                        <button class="btn btn-primary btn-small" style="margin-top: 15px; width: 100%;" onclick="openCursoModal(${curso.id})">Ver Detalles</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderPersonas() {
+            const tbody = document.getElementById('tablaPeopleBody');
+            tbody.innerHTML = dataManager.personas.map(persona => `
+                <tr>
+                    <td>${persona.nombre}</td>
+                    <td>${persona.sap}</td>
+                    <td>${persona.area}</td>
+                    <td><strong>${persona.cursosCompletados}</strong></td>
+                </tr>
+            `).join('');
+        }
+
+        function renderExpertos() {
+            const container = document.getElementById('expertosContainer');
+            container.innerHTML = dataManager.expertos.map(experto => `
+                <div class="card">
+                    <div class="card-header">${experto.nombre}</div>
+                    <div class="card-body">
+                        <p class="card-subtitle"><strong>${experto.especialidad}</strong></p>
+                        <p>${experto.experiencia} de experiencia</p>
+                        <p style="margin-top: 10px; font-size: 12px; color: var(--text-light);">
+                            <strong>Fechas Disponibles:</strong><br>
+                            ${experto.fechasDisponibles.join(', ')}
+                        </p>
+                        <p style="margin-top: 10px; font-size: 12px;"><strong>Email:</strong> ${experto.email}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderTopParticipantes() {
+            const container = document.getElementById('topParticipantesContainer');
+            const top = dataManager.personas.sort((a, b) => b.cursosCompletados - a.cursosCompletados).slice(0, 3);
+            
+            container.innerHTML = top.map((persona, index) => {
+                const rankLabel = index === 0 ? '🥇 ORO' : index === 1 ? '🥈 PLATA' : '🥉 BRONCE';
+                return `
+                    <div class="trophy-card">
+                        <div class="trophy-rank">${rankLabel}</div>
+                        <div class="trophy-name">${persona.nombre}</div>
+                        <div class="trophy-courses"><strong>${persona.cursosCompletados}</strong> cursos completados</div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function renderMisPostulaciones() {
+            const tbody = document.getElementById('tablaMisPostulaciones');
+            tbody.innerHTML = dataManager.postulaciones.map(post => `
+                <tr>
+                    <td>${post.cursoNombre}</td>
+                    <td>${post.nombre}</td>
+                    <td>${post.sap}</td>
+                    <td>${post.fecha}</td>
+                    <td><span class="badge badge-lime">Pendiente</span></td>
+                </tr>
+            `).join('');
+        }
+
+        function openCursoModal(cursoId) {
+            const curso = dataManager.cursos.find(c => c.id === cursoId);
+            if (!curso) return;
+
+            document.getElementById('cursoIdPostularse').value = cursoId;
+            document.getElementById('modalCursoTitulo').textContent = curso.nombre;
+            document.getElementById('modalCursoContenido').innerHTML = `
+                <p><strong>Descripción:</strong> ${curso.descripcion}</p>
+                <p><strong>Nivel:</strong> ${curso.nivel}</p>
+                <p><strong>Duración:</strong> ${curso.duracion} horas</p>
+                <p><strong>Área:</strong> ${curso.area}</p>
+            `;
+            openModal('modalCursoDetalles');
+        }
+
+        function handlePostularse() {
+            openModal('modalPostularse');
+            closeModal('modalCursoDetalles');
+        }
+
+        // ==================== EVENT LISTENERS ====================
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const sectionId = e.target.dataset.section;
+                showSection(sectionId);
+            });
+        });
+
+        // Agregar Curso Form
+        document.getElementById('formAgregarCurso').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const inputs = e.target.querySelectorAll('input, textarea, select');
+            const datos = {
+                nombre: inputs[0].value,
+                descripcion: inputs[1].value,
+                nivel: inputs[2].value,
+                duracion: inputs[3].value
+            };
+            dataManager.addCurso(datos);
+            e.target.reset();
+        });
+
+        // Proponer Curso Form
+        document.getElementById('formProponerCurso').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const inputs = e.target.querySelectorAll('input, textarea, select');
+            const datos = {
+                nombre: inputs[0].value,
+                sap: inputs[1].value,
+                cursoNombre: inputs[2].value,
+                descripcion: inputs[3].value,
+                nivel: inputs[4].value,
+                fecha: new Date().toISOString().split('T')[0]
+            };
+            dataManager.addPropostaCurso(datos);
+            e.target.reset();
+            showSection('home');
+        });
+
+        // Agregar Persona Form
+        document.getElementById('formAgregarPersona').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const inputs = e.target.querySelectorAll('input, select');
+            const datos = {
+                nombre: inputs[0].value,
+                sap: inputs[1].value,
+                area: inputs[2].value,
+                email: inputs[3].value,
+                cursosCompletados: 0
+            };
+            dataManager.addPersona(datos);
+            e.target.reset();
+            showSection('personas');
+        });
+
+        // Registro Experto Form
+        document.getElementById('formRegistroExperto').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const inputs = e.target.querySelectorAll('input, textarea');
+            const datos = {
+                nombre: inputs[0].value,
+                especialidad: inputs[1].value,
+                experiencia: inputs[2].value,
+                email: inputs[3].value,
+                fechasDisponibles: [inputs[4].value]
+            };
+            dataManager.addExperto(datos);
+            e.target.reset();
+            closeModal('modalExpertosRegistro');
+            showSection('expertos');
+        });
+
+        // Postularse Form
+        document.getElementById('formPostularse').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const cursoId = document.getElementById('cursoIdPostularse').value;
+            const curso = dataManager.cursos.find(c => c.id === parseInt(cursoId));
+            const inputs = e.target.querySelectorAll('input');
+            
+            const datos = {
+                cursoId: cursoId,
+                cursoNombre: curso.nombre,
+                nombre: inputs[0].value,
+                sap: inputs[1].value,
+                area: inputs[2].value,
+                fecha: new Date().toISOString().split('T')[0]
+            };
+            
+            dataManager.addPostulacion(datos);
+            e.target.reset();
+            closeModal('modalPostularse');
+        });
+
+        // Search functionality
+        document.getElementById('searchBox').addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            // Implement search logic based on current section
+        });
+
+        // Close modals on outside click
+        window.addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal')) {
+                e.target.classList.remove('active');
+            }
+        });
+
+        // Initial render
+        showSection('home');
+    </script>
 </body>
 </html>

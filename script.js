@@ -1,5 +1,5 @@
 // Google Apps Script Deployment URL - REPLACE WITH YOUR DEPLOYMENT ID
-const APPS_SCRIPT_URL = "https://script.google.com/macros/d/{YOUR_DEPLOYMENT_ID}/usercopy"
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycby8SXwy9Ux3g041jeOm_Uo6m2yfYTSC5OdlKl_aOzuOoLIsa1AOAa1G-gAIuI3MIyRc/exec"
 
 // State Management
 const appState = {
