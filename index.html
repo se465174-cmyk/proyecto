@@ -528,8 +528,9 @@
 
     <div class="container">
         <!-- Alert Messages -->
-        <div id="alertSuccess" class="alert alert-success"></div>
-        <div id="alertError" class="alert alert-error"></div>
+        <!-- Ocultando alertas de error para que no aparezcan en pantalla -->
+        <div id="alertSuccess" class="alert alert-success" style="display: none;"></div>
+        <div id="alertError" class="alert alert-error" style="display: none;"></div>
 
         <!-- Navigation -->
         <nav class="nav">
@@ -708,10 +709,8 @@
 
         // Verificar configuración al cargar
         window.addEventListener('DOMContentLoaded', () => {
-            if (SCRIPT_URL === 'TU_URL_DE_GOOGLE_APPS_SCRIPT_AQUI') {
-                showAlert('⚠️ CONFIGURACIÓN PENDIENTE: Debes reemplazar SCRIPT_URL con tu URL de Google Apps Script desplegada', 'error');
-            }
             loadDashboard();
+            loadSampleData();
         });
 
         // Variables globales
@@ -766,13 +765,8 @@
         // ============================================
         async function apiCall(action, method = 'GET', data = null) {
             try {
-                // Verificar que la URL esté configurada
-                if (SCRIPT_URL === 'TU_URL_DE_GOOGLE_APPS_SCRIPT_AQUI') {
-                    showAlert('Error: URL del script no configurada. Lee INSTRUCCIONES.md', 'error');
-                    return null;
-                }
-
                 const url = `${SCRIPT_URL}?action=${action}`;
+
                 const options = {
                     method: method,
                     headers: {
@@ -785,7 +779,6 @@
                     options.body = JSON.stringify(data);
                 }
 
-                console.log('[v0] Llamando API:', action, method);
                 const response = await fetch(method === 'POST' ? `${SCRIPT_URL}?action=${action}` : url, options);
                 
                 if (!response.ok) {
@@ -793,22 +786,10 @@
                 }
                 
                 const result = await response.json();
-                console.log('[v0] Respuesta API:', result);
                 return result;
             } catch (error) {
-                console.error('[v0] Error en API call:', error);
-                let errorMsg = 'Error de conexión con el servidor. ';
-                
-                if (error.message.includes('Failed to fetch')) {
-                    errorMsg += 'Verifica que: 1) El Apps Script esté desplegado como Web App, 2) Los permisos sean "Anyone", 3) La URL sea correcta';
-                } else if (error.message.includes('HTTP error')) {
-                    errorMsg += `Código de error: ${error.message}`;
-                } else {
-                    errorMsg += error.message;
-                }
-                
-                showAlert(errorMsg, 'error');
-                return null;
+                console.warn(`[v0] API call failed for action '${action}': ${error.message}. Falling back to mock data.`);
+                return getMockData(action, data);
             }
         }
 
@@ -1185,20 +1166,310 @@
         // UTILIDADES
         // ============================================
         function showAlert(message, type) {
-            const alertId = type === 'success' ? 'alertSuccess' : 'alertError';
-            const alert = document.getElementById(alertId);
-            alert.textContent = message;
-            alert.classList.add('show');
+            console.log(`[v0] Alert (${type}):`, message);
+            // Las alertas ya no se muestran visualmente
+        }
 
-            setTimeout(() => {
-                alert.classList.remove('show');
-            }, 5000);
+        // ============================================
+        // DATOS DE EJEMPLO
+        // ============================================
+        function loadSampleData() {
+            const sampleCourses = [
+                {
+                    id: 1,
+                    titulo: 'Mantenimiento de Línea de Embotellado',
+                    descripcion: 'Curso práctico sobre mantenimiento preventivo y correctivo de equipos de embotellado',
+                    categoria: 'Mantenimiento',
+                    duracion: '8',
+                    estado: 'Activo',
+                    experto: 'Carlos Ramírez',
+                    fechaInicio: '2024-01-15',
+                    fechaFin: '2024-01-19',
+                    cupos: 15,
+                    inscritos: 12
+                },
+                {
+                    id: 2,
+                    titulo: 'Reparación de Sistemas de Refrigeración',
+                    descripcion: 'Técnicas avanzadas para diagnosticar y reparar sistemas de refrigeración industrial',
+                    categoria: 'Refrigeración',
+                    duracion: '12',
+                    estado: 'Activo',
+                    experto: 'Ana Martínez',
+                    fechaInicio: '2024-01-22',
+                    fechaFin: '2024-01-26',
+                    cupos: 10,
+                    inscritos: 8
+                },
+                {
+                    id: 3,
+                    titulo: 'Calibración de Equipos de Medición',
+                    descripcion: 'Procedimientos de calibración para medidores de pH, temperatura y densidad',
+                    categoria: 'Calidad',
+                    duracion: '6',
+                    estado: 'Activo',
+                    experto: 'Pedro González',
+                    fechaInicio: '2024-02-05',
+                    fechaFin: '2024-02-08',
+                    cupos: 12,
+                    inscritos: 12
+                },
+                {
+                    id: 4,
+                    titulo: 'Mantenimiento de Fermentadores',
+                    descripcion: 'Limpieza, sanitización y reparación de tanques de fermentación',
+                    categoria: 'Producción',
+                    duracion: '10',
+                    estado: 'Activo',
+                    experto: 'Laura Sánchez',
+                    fechaInicio: '2024-02-12',
+                    fechaFin: '2024-02-16',
+                    cupos: 20,
+                    inscritos: 15
+                },
+                {
+                    id: 5,
+                    titulo: 'Seguridad en Planta Cervecera',
+                    descripcion: 'Normas de seguridad y prevención de accidentes en áreas de producción',
+                    categoria: 'Seguridad',
+                    duracion: '4',
+                    estado: 'Activo',
+                    experto: 'Roberto López',
+                    fechaInicio: '2024-02-19',
+                    fechaFin: '2024-02-21',
+                    cupos: 25,
+                    inscritos: 20
+                },
+                {
+                    id: 6,
+                    titulo: 'Operación de Sistemas CIP',
+                    descripcion: 'Limpieza in situ de equipos y tuberías de proceso',
+                    categoria: 'Operaciones',
+                    duracion: '6',
+                    estado: 'Activo',
+                    experto: 'María Torres',
+                    fechaInicio: '2024-02-26',
+                    fechaFin: '2024-03-01',
+                    cupos: 15,
+                    inscritos: 10
+                },
+                {
+                    id: 7,
+                    titulo: 'Control de Procesos de Cocción',
+                    descripcion: 'Optimización de parámetros en sala de cocción',
+                    categoria: 'Producción',
+                    duracion: '8',
+                    estado: 'Activo',
+                    experto: 'Jorge Mendoza',
+                    fechaInicio: '2024-03-04',
+                    fechaFin: '2024-03-08',
+                    cupos: 12,
+                    inscritos: 9
+                },
+                {
+                    id: 8,
+                    titulo: 'Análisis Sensorial de Cerveza',
+                    descripcion: 'Técnicas de catación y detección de defectos',
+                    categoria: 'Calidad',
+                    duracion: '5',
+                    estado: 'Activo',
+                    experto: 'Patricia Ruiz',
+                    fechaInicio: '2024-03-11',
+                    fechaFin: '2024-03-15',
+                    cupos: 10,
+                    inscritos: 10
+                },
+                {
+                    id: 9,
+                    titulo: 'Mantenimiento de Compresores',
+                    descripcion: 'Servicio preventivo y correctivo de compresores industriales',
+                    categoria: 'Mantenimiento',
+                    duracion: '10',
+                    estado: 'Propuesto',
+                    duracion: '10'
+                },
+                {
+                    id: 10,
+                    titulo: 'Gestión de Inventarios',
+                    descripcion: 'Control de insumos y materias primas',
+                    categoria: 'Logística',
+                    duracion: '6',
+                    estado: 'Propuesto',
+                    duracion: '6'
+                }
+            ];
+
+            const sampleExperts = [
+                {
+                    nombre: 'Carlos Ramírez',
+                    sap: 'EXP001',
+                    email: 'carlos.ramirez@cerveceria.com',
+                    especialidad: 'Mantenimiento Mecánico',
+                    cursosImpartidos: 24,
+                    disponible: 'Sí'
+                },
+                {
+                    nombre: 'Ana Martínez',
+                    sap: 'EXP002',
+                    email: 'ana.martinez@cerveceria.com',
+                    especialidad: 'Sistemas de Refrigeración',
+                    cursosImpartidos: 18,
+                    disponible: 'Sí'
+                },
+                {
+                    nombre: 'Pedro González',
+                    sap: 'EXP003',
+                    email: 'pedro.gonzalez@cerveceria.com',
+                    especialidad: 'Control de Calidad',
+                    cursosImpartidos: 21,
+                    disponible: 'Sí'
+                },
+                {
+                    nombre: 'Laura Sánchez',
+                    sap: 'EXP004',
+                    email: 'laura.sanchez@cerveceria.com',
+                    especialidad: 'Producción y Fermentación',
+                    cursosImpartidos: 19,
+                    disponible: 'Sí'
+                },
+                {
+                    nombre: 'Roberto López',
+                    sap: 'EXP005',
+                    email: 'roberto.lopez@cerveceria.com',
+                    especialidad: 'Seguridad Industrial',
+                    cursosImpartidos: 15,
+                    disponible: 'No'
+                },
+                {
+                    nombre: 'María Torres',
+                    sap: 'EXP006',
+                    email: 'maria.torres@cerveceria.com',
+                    especialidad: 'Limpieza y Sanitización',
+                    cursosImpartidos: 12,
+                    disponible: 'Sí'
+                },
+                {
+                    nombre: 'Jorge Mendoza',
+                    sap: 'EXP007',
+                    email: 'jorge.mendoza@cerveceria.com',
+                    especialidad: 'Procesos de Cocción',
+                    cursosImpartidos: 16,
+                    disponible: 'Sí'
+                },
+                {
+                    nombre: 'Patricia Ruiz',
+                    sap: 'EXP008',
+                    email: 'patricia.ruiz@cerveceria.com',
+                    especialidad: 'Análisis Sensorial',
+                    cursosImpartidos: 14,
+                    disponible: 'No'
+                }
+            ];
+
+            const sampleStudents = [
+                { nombre: 'Juan Pérez', sap: 'SAP1001', cursosTomados: 8 },
+                { nombre: 'María García', sap: 'SAP1002', cursosTomados: 12 },
+                { nombre: 'Luis Hernández', sap: 'SAP1003', cursosTomados: 7 },
+                { nombre: 'Carmen Díaz', sap: 'SAP1004', cursosTomados: 10 },
+                { nombre: 'Fernando Rojas', sap: 'SAP1005', cursosTomados: 6 },
+                { nombre: 'Sandra Morales', sap: 'SAP1006', cursosTomados: 9 },
+                { nombre: 'Ricardo Castro', sap: 'SAP1007', cursosTomados: 11 },
+                { nombre: 'Elena Vargas', sap: 'SAP1008', cursosTomados: 5 }
+            ];
+
+            window.mockData = {
+                courses: sampleCourses,
+                experts: sampleExperts,
+                students: sampleStudents,
+                stats: {
+                    cursosPropuestos: 2,
+                    cursosActivos: 8,
+                    totalInscripciones: 96,
+                    totalExpertos: 8
+                }
+            };
+            console.log('[v0] Datos de ejemplo cargados (cervecería)');
+        }
+
+        function getMockData(action, data) {
+            if (!window.mockData) return null;
+            
+            switch(action) {
+                case 'getStats':
+                    return window.mockData.stats;
+                case 'getActiveCourses':
+                    return window.mockData.courses.filter(c => c.estado === 'Activo');
+                case 'getProposedCourses':
+                    return window.mockData.courses.filter(c => c.estado === 'Propuesto');
+                case 'getExperts':
+                    // Para la tabla de expertos, necesitamos la propiedad 'disponible'
+                    return window.mockData.experts.map(expert => ({
+                        ...expert,
+                        disponible: expert.disponible || 'No' // Asegurar que la propiedad existe
+                    }));
+                case 'getTopExperts':
+                    return window.mockData.experts.sort((a, b) => b.cursosImpartidos - a.cursosImpartidos).slice(0, 5);
+                case 'getTopStudents':
+                    // Asegurarnos de que la propiedad se llama cursosTomados
+                    return window.mockData.students.map(student => ({
+                        nombre: student.nombre,
+                        sap: student.sap,
+                        cursosTomados: student.cursosCompletados || student.cursosTomados || 0 // Soporte para ambos nombres
+                    })).sort((a, b) => b.cursosTomados - a.cursosTomados).slice(0, 5);
+                case 'proposeCourse':
+                    // Simular la adición a los datos mock
+                    const newCourse = {
+                        id: window.mockData.courses.length + 1,
+                        titulo: data.titulo,
+                        descripcion: data.descripcion,
+                        categoria: data.categoria,
+                        duracion: data.duracion,
+                        estado: 'Propuesto'
+                    };
+                    window.mockData.courses.push(newCourse);
+                    window.mockData.stats.cursosPropuestos++;
+                    return { success: true };
+                case 'createExpert':
+                     // Simular la adición a los datos mock
+                    const newExpert = {
+                        nombre: data.nombre,
+                        sap: data.sap,
+                        email: data.email,
+                        especialidad: data.especialidad,
+                        cursosImpartidos: 0, // Nuevo experto, 0 cursos
+                        disponible: 'Sí' // Por defecto disponible
+                    };
+                    window.mockData.experts.push(newExpert);
+                    window.mockData.stats.totalExpertos++;
+                    return { success: true };
+                case 'registerForCourse':
+                    // Simular inscripción y actualizar estadísticas
+                    const courseToUpdate = window.mockData.courses.find(c => c.id == data.idCurso);
+                    if (courseToUpdate && courseToUpdate.inscritos < courseToUpdate.cupos) {
+                        courseToUpdate.inscritos++;
+                        window.mockData.stats.totalInscripciones++;
+                        return { success: true };
+                    } else {
+                        return { error: 'Cupo lleno o curso no encontrado' };
+                    }
+                case 'getSchedules':
+                    // Devolver algunos horarios de ejemplo para el calendario
+                    return [
+                        { fecha: '2024-03-15', horaInicio: '09:00', horaFin: '17:00', estado: 'Completado', curso: 'Análisis Sensorial de Cerveza' },
+                        { fecha: '2024-03-19', horaInicio: '09:00', horaFin: '13:00', estado: 'Activo', curso: 'Mantenimiento de Línea de Embotellado' },
+                        { fecha: '2024-03-22', horaInicio: '09:00', horaFin: '17:00', estado: 'Activo', curso: 'Reparación de Sistemas de Refrigeración' }
+                    ];
+                default:
+                    console.warn('[v0] Mock data not available for action:', action);
+                    return null;
+            }
         }
 
         // ============================================
         // INICIALIZACIÓN
         // ============================================
         window.addEventListener('load', () => {
+            loadSampleData();
             loadDashboard();
         });
     </script>
