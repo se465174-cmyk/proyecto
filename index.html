@@ -3,153 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Excellent Learning Center - Plataforma de Capacitación</title>
+    <title>Sistema de Gestión de Cursos Técnicos</title>
     <style>
-        :root {
-            --primary-cyan: #00D9FF;
-            --primary-lime: #32FF00;
-            --primary-orange: #FF6B35;
-            --light-gray: #F5F7FA;
-            --white: #FFFFFF;
-            --text-dark: #1A1A2E;
-            --text-light: #6C757D;
-            --border-color: #E0E0E0;
-            --success: #10B981;
-            --warning: #F59E0B;
-            --danger: #EF4444;
-            --transition: all 0.3s ease;
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        :root {
+            --primary: #8b5cf6;
+            --primary-dark: #7c3aed;
+            --secondary: #06b6d4;
+            --secondary-dark: #0891b2;
+            --accent: #f472b6;
+            --background: #fafafa;
+            --surface: #ffffff;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --border: #e5e7eb;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--light-gray);
-            color: var(--text-dark);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #faf5ff 0%, #f0f9ff 100%);
+            color: var(--text-primary);
             line-height: 1.6;
-        }
-
-        /* Sidebar */
-        .sidebar {
-            position: fixed;
-            left: 0;
-            top: 0;
-            width: 270px;
-            height: 100vh;
-            background: linear-gradient(135deg, #1A1A2E 0%, #16213E 100%);
-            color: white;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            z-index: 1000;
-            box-shadow: 4px 0 15px rgba(0, 0, 0, 0.2);
-            overflow-y: auto;
-        }
-
-        .sidebar-header {
-            padding: 25px 20px;
-            border-bottom: 2px solid var(--primary-cyan);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: var(--primary-cyan);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .nav-menu {
-            list-style: none;
-            flex: 1;
-            padding: 15px 0;
-        }
-
-        .nav-menu li {
-            margin: 0;
-        }
-
-        .nav-link {
-            display: block;
-            padding: 15px 20px;
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            transition: var(--transition);
-            border-left: 4px solid transparent;
-            font-size: 14px;
-            font-weight: 500;
-        }
-
-        .nav-link:hover,
-        .nav-link.active {
-            background-color: rgba(0, 217, 255, 0.1);
-            color: white;
-            border-left-color: var(--primary-cyan);
-            padding-left: 22px;
-        }
-
-        /* Main Content */
-        .main-content {
-            margin-left: 270px;
             min-height: 100vh;
-            background-color: var(--light-gray);
         }
 
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
         .header {
-            background: white;
-            padding: 25px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 30px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
         }
 
         .header h1 {
-            font-size: 28px;
-            color: var(--text-dark);
+            font-size: 2.5rem;
             font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
         }
 
-        .header-right {
+        .header p {
+            text-align: center;
+            opacity: 0.95;
+            font-size: 1.1rem;
+        }
+
+        /* Navigation */
+        .nav {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
             display: flex;
-            gap: 20px;
-            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
-        .search-box {
-            padding: 12px 18px;
-            border: 2px solid var(--border-color);
+        .nav-btn {
+            padding: 12px 24px;
+            border: none;
+            background: var(--background);
+            color: var(--text-primary);
             border-radius: 8px;
-            width: 280px;
-            font-size: 14px;
-            transition: var(--transition);
-            background: white;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
         }
 
-        .search-box:focus {
-            outline: none;
-            border-color: var(--primary-cyan);
-            box-shadow: 0 0 0 3px rgba(0, 217, 255, 0.1);
+        .nav-btn:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
         }
 
-        /* Content Section */
-        .content-section {
+        .nav-btn.active {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* Content Sections */
+        .section {
             display: none;
-            padding: 40px;
             animation: fadeIn 0.3s ease;
         }
 
-        .content-section.active {
+        .section.active {
             display: block;
         }
 
@@ -164,183 +123,24 @@
             }
         }
 
-        .section-title {
-            font-size: 32px;
-            color: var(--text-dark);
-            margin-bottom: 30px;
-            font-weight: 700;
-            border-bottom: 3px solid var(--primary-lime);
-            padding-bottom: 15px;
-        }
-
-        /* Grid Systems */
-        .grid-2 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-            margin-bottom: 40px;
-        }
-
-        .grid-3 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-
-        /* Stat Card */
-        .stat-card {
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-            border-top: 4px solid var(--primary-cyan);
-            transition: var(--transition);
-        }
-
-        .stat-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
-        }
-
-        .stat-label {
-            font-size: 13px;
-            color: var(--text-light);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
-
-        .stat-number {
-            font-size: 42px;
-            font-weight: 700;
-            color: var(--primary-orange);
-            margin-bottom: 10px;
-        }
-
-        .stat-subtext {
-            font-size: 12px;
-            color: var(--text-light);
-        }
-
-        /* Card */
+        /* Cards */
         .card {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-            transition: var(--transition);
-            border: 1px solid var(--border-color);
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
-        }
-
-        .card-header {
-            background: linear-gradient(135deg, var(--primary-cyan) 0%, var(--primary-lime) 100%);
-            color: var(--text-dark);
-            padding: 20px;
-            font-weight: 600;
-            font-size: 16px;
-        }
-
-        .card-body {
-            padding: 25px;
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            margin-bottom: 25px;
+            border: 1px solid var(--border);
         }
 
         .card-title {
-            font-size: 18px;
+            font-size: 1.75rem;
             font-weight: 700;
-            margin-bottom: 10px;
-            color: var(--text-dark);
-        }
-
-        .card-subtitle {
-            font-size: 13px;
-            color: var(--text-light);
-            margin-bottom: 15px;
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            margin-right: 8px;
-            margin-bottom: 10px;
-        }
-
-        .badge-cyan {
-            background: rgba(0, 217, 255, 0.2);
-            color: #0099CC;
-        }
-
-        .badge-lime {
-            background: rgba(50, 255, 0, 0.2);
-            color: #22AA00;
-        }
-
-        .badge-orange {
-            background: rgba(255, 107, 53, 0.2);
-            color: var(--primary-orange);
-        }
-
-        /* Buttons */
-        .btn {
-            padding: 12px 28px;
-            border: none;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            display: inline-block;
-            text-decoration: none;
-            text-align: center;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .btn-primary {
-            background: var(--primary-cyan);
-            color: var(--text-dark);
-        }
-
-        .btn-primary:hover {
-            background: #00BBDD;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 217, 255, 0.3);
-        }
-
-        .btn-secondary {
-            background: var(--primary-lime);
-            color: var(--text-dark);
-        }
-
-        .btn-secondary:hover {
-            background: #28DD00;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(50, 255, 0, 0.3);
-        }
-
-        .btn-tertiary {
-            background: var(--primary-orange);
-            color: white;
-        }
-
-        .btn-tertiary:hover {
-            background: #FF5220;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
-        }
-
-        .btn-small {
-            padding: 8px 16px;
-            font-size: 12px;
+            color: var(--primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         /* Forms */
@@ -350,914 +150,1057 @@
 
         .form-label {
             display: block;
-            font-size: 14px;
             font-weight: 600;
-            color: var(--text-dark);
+            color: var(--text-primary);
             margin-bottom: 8px;
+            font-size: 0.95rem;
         }
 
         .form-input,
-        .form-select,
-        .form-textarea {
+        .form-textarea,
+        .form-select {
             width: 100%;
-            padding: 12px 15px;
-            border: 2px solid var(--border-color);
+            padding: 12px 16px;
+            border: 2px solid var(--border);
             border-radius: 8px;
-            font-size: 14px;
-            transition: var(--transition);
+            font-size: 1rem;
+            transition: all 0.3s ease;
             font-family: inherit;
-            background: white;
         }
 
         .form-input:focus,
-        .form-select:focus,
-        .form-textarea:focus {
+        .form-textarea:focus,
+        .form-select:focus {
             outline: none;
-            border-color: var(--primary-cyan);
-            box-shadow: 0 0 0 3px rgba(0, 217, 255, 0.1);
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
         }
 
         .form-textarea {
             resize: vertical;
-            min-height: 120px;
+            min-height: 100px;
         }
 
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 3000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.6);
-            animation: fadeIn 0.3s ease;
-        }
-
-        .modal.active {
-            display: flex;
+        /* Buttons */
+        .btn {
+            padding: 14px 28px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
             align-items: center;
+            gap: 8px;
             justify-content: center;
         }
 
-        .modal-content {
-            background-color: white;
-            padding: 40px;
-            border-radius: 12px;
-            width: 90%;
-            max-width: 600px;
-            max-height: 85vh;
-            overflow-y: auto;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            position: relative;
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
         }
 
-        .modal-close {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 28px;
-            color: var(--text-light);
-            cursor: pointer;
-            background: none;
-            border: none;
-            transition: var(--transition);
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
         }
 
-        .modal-close:hover {
-            color: var(--text-dark);
-            transform: rotate(90deg);
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-dark) 100%);
+            color: white;
         }
 
-        .modal-title {
-            font-size: 24px;
-            color: var(--text-dark);
-            margin-bottom: 25px;
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(6, 182, 212, 0.4);
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #059669;
+            transform: translateY(-2px);
+        }
+
+        /* Dashboard Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-card h3 {
+            font-size: 2.5rem;
             font-weight: 700;
-            border-bottom: 2px solid var(--primary-lime);
-            padding-bottom: 15px;
-        }
-
-        /* Recognition Badge */
-        .trophy-card {
-            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
-            padding: 40px 30px;
-            border-radius: 12px;
-            text-align: center;
-            color: var(--text-dark);
-            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .trophy-card::before {
-            content: '🏆';
-            font-size: 60px;
-            margin-bottom: 15px;
-            display: block;
-        }
-
-        .trophy-rank {
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
             margin-bottom: 8px;
-            font-weight: 700;
         }
 
-        .trophy-name {
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 10px;
+        .stat-card p {
+            opacity: 0.95;
+            font-size: 1rem;
         }
 
-        .trophy-courses {
-            font-size: 18px;
+        /* Course List */
+        .course-list {
+            display: grid;
+            gap: 20px;
+        }
+
+        .course-item {
+            background: var(--surface);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .course-item:hover {
+            border-color: var(--primary);
+            box-shadow: 0 4px 16px rgba(139, 92, 246, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .course-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 12px;
+        }
+
+        .course-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .course-badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
             font-weight: 600;
+        }
+
+        .badge-active {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .badge-pending {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .course-info {
+            color: var(--text-secondary);
+            margin-bottom: 15px;
         }
 
         /* Table */
         .table-container {
-            background: white;
-            border-radius: 12px;
-            overflow: auto;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            overflow-x: auto;
         }
 
-        table {
+        .table {
             width: 100%;
             border-collapse: collapse;
+            margin-top: 20px;
         }
 
-        th {
-            background: linear-gradient(135deg, var(--primary-cyan) 0%, var(--primary-lime) 100%);
-            color: var(--text-dark);
-            padding: 18px;
+        .table th {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 15px;
             text-align: left;
+            font-weight: 600;
+        }
+
+        .table td {
+            padding: 15px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .table tr:hover {
+            background: var(--background);
+        }
+
+        /* Calendar */
+        .calendar {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 20px;
+            border: 2px solid var(--border);
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .calendar-day:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .calendar-day.has-event {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            font-weight: 600;
+        }
+
+        /* Rankings */
+        .ranking-list {
+            list-style: none;
+        }
+
+        .ranking-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            margin-bottom: 10px;
+            background: var(--background);
+            border-radius: 10px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .ranking-position {
+            font-size: 1.5rem;
             font-weight: 700;
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            color: var(--primary);
+            margin-right: 20px;
+            min-width: 40px;
         }
 
-        td {
-            padding: 15px 18px;
-            border-bottom: 1px solid var(--border-color);
-            font-size: 14px;
+        .ranking-info {
+            flex: 1;
         }
 
-        tr:hover {
-            background-color: var(--light-gray);
+        .ranking-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .ranking-count {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-secondary);
+        }
+
+        .spinner {
+            border: 3px solid var(--border);
+            border-top: 3px solid var(--primary);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Alert */
+        .alert {
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .alert.show {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .alert-success {
+            background: #d1fae5;
+            color: #065f46;
+            border-left: 4px solid var(--success);
+        }
+
+        .alert-error {
+            background: #fee2e2;
+            color: #991b1b;
+            border-left: 4px solid var(--error);
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-            .sidebar {
-                width: 100%;
-                height: auto;
-                position: relative;
-                flex-direction: row;
-                flex-wrap: wrap;
+            .header h1 {
+                font-size: 1.75rem;
             }
 
-            .main-content {
-                margin-left: 0;
-            }
-
-            .header {
-                flex-direction: column;
-                gap: 15px;
-            }
-
-            .header-right {
-                width: 100%;
+            .nav {
                 flex-direction: column;
             }
 
-            .search-box {
+            .nav-btn {
                 width: 100%;
             }
 
-            .grid-3 {
+            .dashboard-grid {
                 grid-template-columns: 1fr;
             }
 
-            .modal-content {
-                width: 95%;
-                max-height: 90vh;
+            .course-header {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .calendar-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .two-column {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Sidebar -->
-    <aside class="sidebar">
-        <div class="sidebar-header">
-            <div class="logo">ELC</div>
+    <div class="header">
+        <div class="container">
+            <h1>🎓 Sistema de Gestión de Cursos Técnicos</h1>
+            <p>Plataforma de aprendizaje y desarrollo profesional</p>
         </div>
-        <ul class="nav-menu">
-            <li><a href="#" class="nav-link active" data-section="home">📊 Dashboard</a></li>
-            <li><a href="#" class="nav-link" data-section="cursos">📚 Cursos</a></li>
-            <li><a href="#" class="nav-link" data-section="agregar-curso">➕ Agregar Curso</a></li>
-            <li><a href="#" class="nav-link" data-section="proponer-curso">✍️ Proponer Curso</a></li>
-            <li><a href="#" class="nav-link" data-section="expertos">👨‍🏫 Expertos</a></li>
-            <li><a href="#" class="nav-link" data-section="personas">👥 Personas</a></li>
-            <li><a href="#" class="nav-link" data-section="agregar-persona">➕ Agregar Persona</a></li>
-            <li><a href="#" class="nav-link" data-section="top-participantes">🌟 Top Participantes</a></li>
-            <li><a href="#" class="nav-link" data-section="mis-postulaciones">📋 Mis Postulaciones</a></li>
-        </ul>
-    </aside>
+    </div>
 
-    <!-- Main Content -->
-    <div class="main-content">
-        <!-- Header -->
-        <div class="header">
-            <h1>Excellent Learning Center</h1>
-            <div class="header-right">
-                <input type="text" class="search-box" id="searchBox" placeholder="Buscar...">
-            </div>
-        </div>
+    <div class="container">
+        <!-- Alert Messages -->
+        <div id="alertSuccess" class="alert alert-success"></div>
+        <div id="alertError" class="alert alert-error"></div>
+
+        <!-- Navigation -->
+        <nav class="nav">
+            <button class="nav-btn active" onclick="showSection('dashboard')">📊 Dashboard</button>
+            <button class="nav-btn" onclick="showSection('propose')">➕ Proponer Curso</button>
+            <button class="nav-btn" onclick="showSection('active')">📚 Cursos Activos</button>
+            <button class="nav-btn" onclick="showSection('experts')">👨‍🏫 Expertos</button>
+            <button class="nav-btn" onclick="showSection('calendar')">📅 Calendario</button>
+            <button class="nav-btn" onclick="showSection('rankings')">🏆 Rankings</button>
+        </nav>
 
         <!-- Dashboard Section -->
-        <div id="home" class="content-section active">
-            <h2 class="section-title">📊 Dashboard</h2>
-            
-            <div class="grid-2">
+        <section id="dashboard" class="section active">
+            <div class="dashboard-grid">
                 <div class="stat-card">
-                    <div class="stat-label">Total de Cursos</div>
-                    <div class="stat-number" id="totalCursos">0</div>
-                    <div class="stat-subtext">Disponibles en plataforma</div>
+                    <h3 id="statProposed">0</h3>
+                    <p>Cursos Propuestos</p>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-label">Total de Personas</div>
-                    <div class="stat-number" id="totalPersonas">0</div>
-                    <div class="stat-subtext">Registradas en el sistema</div>
+                <div class="stat-card" style="background: linear-gradient(135deg, var(--secondary) 0%, #0891b2 100%);">
+                    <h3 id="statActive">0</h3>
+                    <p>Cursos Activos</p>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-label">Total de Expertos</div>
-                    <div class="stat-number" id="totalExpertos">0</div>
-                    <div class="stat-subtext">Instructores disponibles</div>
+                <div class="stat-card" style="background: linear-gradient(135deg, var(--accent) 0%, #ec4899 100%);">
+                    <h3 id="statRegistrations">0</h3>
+                    <p>Inscripciones Totales</p>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-label">Postulaciones Activas</div>
-                    <div class="stat-number" id="totalPostulaciones">0</div>
-                    <div class="stat-subtext">En revisión</div>
+                <div class="stat-card" style="background: linear-gradient(135deg, var(--success) 0%, #059669 100%);">
+                    <h3 id="statExperts">0</h3>
+                    <p>Expertos Registrados</p>
                 </div>
             </div>
-        </div>
 
-        <!-- Cursos Section -->
-        <div id="cursos" class="content-section">
-            <h2 class="section-title">📚 Catálogo de Cursos</h2>
-            <div id="cursosContainer" class="grid-3"></div>
-        </div>
+            <div class="card">
+                <h2 class="card-title">📋 Cursos Activos Recientes</h2>
+                <div id="dashboardCourses" class="course-list"></div>
+            </div>
+        </section>
 
-        <!-- Agregar Curso Section -->
-        <div id="agregar-curso" class="content-section">
-            <h2 class="section-title">➕ Agregar Nuevo Curso</h2>
-            <div style="background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); max-width: 600px;">
-                <form id="formAgregarCurso">
+        <!-- Propose Course Section -->
+        <section id="propose" class="section">
+            <div class="card">
+                <h2 class="card-title">➕ Proponer Nuevo Curso</h2>
+                <form id="proposeCourseForm">
                     <div class="form-group">
-                        <label class="form-label">Nombre del Curso</label>
-                        <input type="text" class="form-input" required>
+                        <label class="form-label">Título del Curso</label>
+                        <input type="text" class="form-input" id="courseTitle" required>
                     </div>
                     <div class="form-group">
                         <label class="form-label">Descripción</label>
-                        <textarea class="form-textarea" required></textarea>
+                        <textarea class="form-textarea" id="courseDescription" required></textarea>
                     </div>
-                    <div class="form-group">
-                        <label class="form-label">Nivel</label>
-                        <select class="form-select" required>
-                            <option value="">Seleccionar nivel</option>
-                            <option value="Básico">Básico</option>
-                            <option value="Intermedio">Intermedio</option>
-                            <option value="Avanzado">Avanzado</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Duración (horas)</label>
-                        <input type="number" class="form-input" min="1" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Agregar Curso</button>
-                </form>
-            </div>
-        </div>
-
-        <!-- Proponer Curso Section -->
-        <div id="proponer-curso" class="content-section">
-            <h2 class="section-title">✍️ Proponer Nuevo Curso</h2>
-            <div style="background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); max-width: 600px;">
-                <form id="formProponerCurso">
-                    <div class="form-group">
-                        <label class="form-label">Tu Nombre</label>
-                        <input type="text" class="form-input" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Tu SAP (Número de Trabajador)</label>
-                        <input type="text" class="form-input" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Nombre del Curso Propuesto</label>
-                        <input type="text" class="form-input" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Descripción y Justificación</label>
-                        <textarea class="form-textarea" required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Nivel Sugerido</label>
-                        <select class="form-select" required>
-                            <option value="">Seleccionar nivel</option>
-                            <option value="Básico">Básico</option>
-                            <option value="Intermedio">Intermedio</option>
-                            <option value="Avanzado">Avanzado</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-secondary">Enviar Propuesta</button>
-                </form>
-            </div>
-        </div>
-
-        <!-- Expertos Section -->
-        <div id="expertos" class="content-section">
-            <h2 class="section-title">👨‍🏫 Expertos e Instructores</h2>
-            <button class="btn btn-tertiary" style="margin-bottom: 30px;" onclick="openModal('modalExpertosRegistro')">Registrarse como Experto</button>
-            <div id="expertosContainer" class="grid-3"></div>
-        </div>
-
-        <!-- Personas Section -->
-        <div id="personas" class="content-section">
-            <h2 class="section-title">👥 Personas Registradas</h2>
-            <div class="table-container">
-                <table id="tablaPeople">
-                    <thead>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>SAP</th>
-                            <th>Área</th>
-                            <th>Cursos Completados</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tablaPeopleBody">
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- Agregar Persona Section -->
-        <div id="agregar-persona" class="content-section">
-            <h2 class="section-title">➕ Agregar Nueva Persona</h2>
-            <div style="background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); max-width: 600px;">
-                <form id="formAgregarPersona">
-                    <div class="form-group">
-                        <label class="form-label">Nombre Completo</label>
-                        <input type="text" class="form-input" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">SAP (Número de Trabajador)</label>
-                        <input type="text" class="form-input" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Área/Departamento</label>
-                        <select class="form-select" required>
-                            <option value="">Seleccionar área</option>
-                            <option value="Producción">Producción</option>
-                            <option value="Mantenimiento">Mantenimiento</option>
-                            <option value="Calidad">Calidad</option>
-                            <option value="Seguridad">Seguridad</option>
-                            <option value="Administración">Administración</option>
-                            <option value="Logística">Logística</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Email</label>
-                        <input type="email" class="form-input" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Agregar Persona</button>
-                </form>
-            </div>
-        </div>
-
-        <!-- Top Participantes Section -->
-        <div id="top-participantes" class="content-section">
-            <h2 class="section-title">🌟 Top Participantes - Reconocimientos</h2>
-            <div id="topParticipantesContainer" class="grid-3"></div>
-        </div>
-
-        <!-- Mis Postulaciones Section -->
-        <div id="mis-postulaciones" class="content-section">
-            <h2 class="section-title">📋 Mis Postulaciones a Cursos</h2>
-            <div class="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Curso</th>
-                            <th>Nombre</th>
-                            <th>SAP</th>
-                            <th>Fecha Postulación</th>
-                            <th>Estado</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tablaMisPostulaciones">
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal - Postularse a Curso -->
-    <div id="modalPostularse" class="modal">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeModal('modalPostularse')">✕</button>
-            <h3 class="modal-title">Postularse al Curso</h3>
-            <form id="formPostularse">
-                <input type="hidden" id="cursoIdPostularse">
-                <div class="form-group">
-                    <label class="form-label">Tu Nombre</label>
-                    <input type="text" class="form-input" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Tu SAP (Número de Trabajador)</label>
-                    <input type="text" class="form-input" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Tu Área/Departamento</label>
-                    <input type="text" class="form-input" required>
-                </div>
-                <button type="submit" class="btn btn-primary">Enviar Postulación</button>
-            </form>
-        </div>
-    </div>
-
-    <!-- Modal - Registro Expertos -->
-    <div id="modalExpertosRegistro" class="modal">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeModal('modalExpertosRegistro')">✕</button>
-            <h3 class="modal-title">Registrarse como Experto</h3>
-            <form id="formRegistroExperto">
-                <div class="form-group">
-                    <label class="form-label">Nombre Completo</label>
-                    <input type="text" class="form-input" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Especialidad/Área</label>
-                    <input type="text" class="form-input" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Descripción de Experiencia</label>
-                    <textarea class="form-textarea" required></textarea>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Email de Contacto</label>
-                    <input type="email" class="form-input" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Agregar Fecha Disponible (Formato: YYYY-MM-DD)</label>
-                    <input type="date" class="form-input" required>
-                </div>
-                <button type="submit" class="btn btn-secondary">Registrarse</button>
-            </form>
-        </div>
-    </div>
-
-    <!-- Modal - Ver Detalles Curso -->
-    <div id="modalCursoDetalles" class="modal">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeModal('modalCursoDetalles')">✕</button>
-            <h3 class="modal-title" id="modalCursoTitulo"></h3>
-            <div id="modalCursoContenido"></div>
-            <button class="btn btn-primary" style="margin-top: 20px; width: 100%;" onclick="handlePostularse()">Postularme al Curso</button>
-        </div>
-    </div>
-
-    <!-- JavaScript -->
-    <script>
-        // ==================== DATA MANAGEMENT ====================
-        const API_URL = 'https://script.google.com/macros/d/{YOUR_DEPLOYMENT_ID}/usercopy';
-
-        class DataManager {
-            constructor() {
-                this.cursos = [];
-                this.personas = [];
-                this.expertos = [];
-                this.postulaciones = [];
-                this.propostasCursos = [];
-                this.loadData();
-            }
-
-            loadData() {
-                // Simulated data loading - replace with actual API calls
-                this.loadCursosData();
-                this.loadPersonasData();
-                this.loadExpertosData();
-                this.loadPostulacionesData();
-            }
-
-            loadCursosData() {
-                // Data will be fetched from Google Sheets
-                fetch(`${API_URL}?action=getCursos`)
-                    .then(res => res.json())
-                    .then(data => {
-                        this.cursos = data || [];
-                        this.updateDashboard();
-                    })
-                    .catch(() => {
-                        console.log('[v0] Using sample data for cursos');
-                        this.cursos = this.getSampleCursos();
-                        this.updateDashboard();
-                    });
-            }
-
-            loadPersonasData() {
-                fetch(`${API_URL}?action=getPersonas`)
-                    .then(res => res.json())
-                    .then(data => {
-                        this.personas = data || [];
-                        this.updateDashboard();
-                    })
-                    .catch(() => {
-                        this.personas = this.getSamplePersonas();
-                        this.updateDashboard();
-                    });
-            }
-
-            loadExpertosData() {
-                fetch(`${API_URL}?action=getExpertos`)
-                    .then(res => res.json())
-                    .then(data => {
-                        this.expertos = data || [];
-                        this.updateDashboard();
-                    })
-                    .catch(() => {
-                        this.expertos = this.getSampleExpertos();
-                        this.updateDashboard();
-                    });
-            }
-
-            loadPostulacionesData() {
-                fetch(`${API_URL}?action=getPostulaciones`)
-                    .then(res => res.json())
-                    .then(data => {
-                        this.postulaciones = data || [];
-                    })
-                    .catch(() => {
-                        this.postulaciones = [];
-                    });
-            }
-
-            addCurso(cursoData) {
-                fetch(API_URL, {
-                    method: 'POST',
-                    body: JSON.stringify({
-                        action: 'addCurso',
-                        data: cursoData
-                    })
-                })
-                .then(() => {
-                    this.loadCursosData();
-                    alert('Curso agregado exitosamente');
-                })
-                .catch(err => {
-                    console.error('[v0] Error adding curso:', err);
-                    alert('Error al agregar el curso');
-                });
-            }
-
-            addPersona(personaData) {
-                fetch(API_URL, {
-                    method: 'POST',
-                    body: JSON.stringify({
-                        action: 'addPersona',
-                        data: personaData
-                    })
-                })
-                .then(() => {
-                    this.loadPersonasData();
-                    alert('Persona agregada exitosamente');
-                })
-                .catch(err => {
-                    console.error('[v0] Error adding persona:', err);
-                    alert('Error al agregar la persona');
-                });
-            }
-
-            addExperto(expertoData) {
-                fetch(API_URL, {
-                    method: 'POST',
-                    body: JSON.stringify({
-                        action: 'addExperto',
-                        data: expertoData
-                    })
-                })
-                .then(() => {
-                    this.loadExpertosData();
-                    alert('Experto registrado exitosamente');
-                })
-                .catch(err => {
-                    console.error('[v0] Error registering experto:', err);
-                    alert('Error al registrar el experto');
-                });
-            }
-
-            addPostulacion(postulacionData) {
-                fetch(API_URL, {
-                    method: 'POST',
-                    body: JSON.stringify({
-                        action: 'addPostulacion',
-                        data: postulacionData
-                    })
-                })
-                .then(() => {
-                    this.loadPostulacionesData();
-                    alert('Postulación enviada exitosamente');
-                })
-                .catch(err => {
-                    console.error('[v0] Error adding postulacion:', err);
-                    alert('Error al enviar la postulación');
-                });
-            }
-
-            addPropostaCurso(proposteData) {
-                fetch(API_URL, {
-                    method: 'POST',
-                    body: JSON.stringify({
-                        action: 'addPropostaCurso',
-                        data: proposteData
-                    })
-                })
-                .then(() => {
-                    alert('Propuesta de curso enviada exitosamente');
-                })
-                .catch(err => {
-                    console.error('[v0] Error adding proposta:', err);
-                    alert('Error al enviar la propuesta');
-                });
-            }
-
-            updateDashboard() {
-                document.getElementById('totalCursos').textContent = this.cursos.length;
-                document.getElementById('totalPersonas').textContent = this.personas.length;
-                document.getElementById('totalExpertos').textContent = this.expertos.length;
-                document.getElementById('totalPostulaciones').textContent = this.postulaciones.length;
-            }
-
-            getSampleCursos() {
-                return [
-                    { id: 1, nombre: 'Python Básico', nivel: 'Básico', duracion: 40, descripcion: 'Introducción a la programación en Python', area: 'Programación' },
-                    { id: 2, nombre: 'Seguridad Industrial', nivel: 'Intermedio', duracion: 20, descripcion: 'Protocolos y procedimientos de seguridad', area: 'Seguridad' },
-                    { id: 3, nombre: 'Liderazgo Efectivo', nivel: 'Avanzado', duracion: 30, descripcion: 'Desarrollo de habilidades de liderazgo', area: 'RH' }
-                ];
-            }
-
-            getSamplePersonas() {
-                return [
-                    { id: 1, nombre: 'Juan Pérez', sap: '12345', area: 'Producción', email: 'juan@example.com', cursosCompletados: 5 },
-                    { id: 2, nombre: 'María García', sap: '12346', area: 'Calidad', email: 'maria@example.com', cursosCompletados: 8 },
-                    { id: 3, nombre: 'Carlos López', sap: '12347', area: 'Mantenimiento', email: 'carlos@example.com', cursosCompletados: 3 }
-                ];
-            }
-
-            getSampleExpertos() {
-                return [
-                    { id: 1, nombre: 'Dr. Raúl Martínez', especialidad: 'Python & Programación', experiencia: '15 años', email: 'raul@example.com', fechasDisponibles: ['2025-01-15', '2025-01-22'] },
-                    { id: 2, nombre: 'Ing. Sofia Rodríguez', especialidad: 'Seguridad Industrial', experiencia: '12 años', email: 'sofia@example.com', fechasDisponibles: ['2025-01-17'] }
-                ];
-            }
-        }
-
-        const dataManager = new DataManager();
-
-        // ==================== UI FUNCTIONS ====================
-        function openModal(modalId) {
-            document.getElementById(modalId).classList.add('active');
-        }
-
-        function closeModal(modalId) {
-            document.getElementById(modalId).classList.remove('active');
-        }
-
-        function showSection(sectionId) {
-            document.querySelectorAll('.content-section').forEach(sec => sec.classList.remove('active'));
-            document.getElementById(sectionId).classList.add('active');
-            
-            document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
-            document.querySelector(`[data-section="${sectionId}"]`).classList.add('active');
-
-            // Render section-specific content
-            if (sectionId === 'cursos') renderCursos();
-            if (sectionId === 'personas') renderPersonas();
-            if (sectionId === 'expertos') renderExpertos();
-            if (sectionId === 'top-participantes') renderTopParticipantes();
-            if (sectionId === 'mis-postulaciones') renderMisPostulaciones();
-        }
-
-        function renderCursos() {
-            const container = document.getElementById('cursosContainer');
-            container.innerHTML = dataManager.cursos.map(curso => `
-                <div class="card">
-                    <div class="card-header">${curso.nombre}</div>
-                    <div class="card-body">
-                        <p class="card-subtitle">${curso.descripcion}</p>
-                        <div>
-                            <span class="badge badge-cyan">Nivel: ${curso.nivel}</span>
-                            <span class="badge badge-orange">${curso.duracion} horas</span>
+                    <div class="two-column">
+                        <div class="form-group">
+                            <label class="form-label">Categoría</label>
+                            <select class="form-select" id="courseCategory" required>
+                                <option value="">Seleccionar...</option>
+                                <option value="Programación">Programación</option>
+                                <option value="Redes">Redes</option>
+                                <option value="Seguridad">Seguridad</option>
+                                <option value="Base de Datos">Base de Datos</option>
+                                <option value="Cloud">Cloud Computing</option>
+                                <option value="DevOps">DevOps</option>
+                                <option value="Otro">Otro</option>
+                            </select>
                         </div>
-                        <button class="btn btn-primary btn-small" style="margin-top: 15px; width: 100%;" onclick="openCursoModal(${curso.id})">Ver Detalles</button>
+                        <div class="form-group">
+                            <label class="form-label">Duración (horas)</label>
+                            <input type="number" class="form-input" id="courseDuration" min="1" required>
+                        </div>
                     </div>
+                    <button type="submit" class="btn btn-primary">Proponer Curso</button>
+                </form>
+            </div>
+
+            <div class="card">
+                <h2 class="card-title">📝 Cursos Propuestos</h2>
+                <div id="proposedCoursesList"></div>
+            </div>
+        </section>
+
+        <!-- Active Courses Section -->
+        <section id="active" class="section">
+            <div class="card">
+                <h2 class="card-title">📚 Cursos Disponibles para Inscripción</h2>
+                <div id="activeCoursesList" class="course-list"></div>
+            </div>
+        </section>
+
+        <!-- Experts Section -->
+        <section id="experts" class="section">
+            <div class="card">
+                <h2 class="card-title">👨‍🏫 Registrar Nuevo Experto</h2>
+                <form id="createExpertForm">
+                    <div class="two-column">
+                        <div class="form-group">
+                            <label class="form-label">Nombre Completo</label>
+                            <input type="text" class="form-input" id="expertName" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">SAP</label>
+                            <input type="text" class="form-input" id="expertSAP" required>
+                        </div>
+                    </div>
+                    <div class="two-column">
+                        <div class="form-group">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-input" id="expertEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Especialidad</label>
+                            <input type="text" class="form-input" id="expertSpecialty" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-secondary">Registrar Experto</button>
+                </form>
+            </div>
+
+            <div class="card">
+                <h2 class="card-title">👥 Lista de Expertos</h2>
+                <div class="table-container">
+                    <table class="table" id="expertsTable">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>SAP</th>
+                                <th>Especialidad</th>
+                                <th>Cursos Impartidos</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody id="expertsTableBody"></tbody>
+                    </table>
                 </div>
-            `).join('');
-        }
+            </div>
+        </section>
 
-        function renderPersonas() {
-            const tbody = document.getElementById('tablaPeopleBody');
-            tbody.innerHTML = dataManager.personas.map(persona => `
-                <tr>
-                    <td>${persona.nombre}</td>
-                    <td>${persona.sap}</td>
-                    <td>${persona.area}</td>
-                    <td><strong>${persona.cursosCompletados}</strong></td>
-                </tr>
-            `).join('');
-        }
+        <!-- Calendar Section -->
+        <section id="calendar" class="section">
+            <div class="card">
+                <h2 class="card-title">📅 Calendario de Cursos</h2>
+                <div class="calendar">
+                    <div class="calendar-header">
+                        <button class="btn btn-primary" onclick="changeMonth(-1)">← Anterior</button>
+                        <h3 id="calendarMonth"></h3>
+                        <button class="btn btn-primary" onclick="changeMonth(1)">Siguiente →</button>
+                    </div>
+                    <div class="calendar-grid" id="calendarGrid"></div>
+                </div>
+                <div id="calendarEvents" style="margin-top: 20px;"></div>
+            </div>
+        </section>
 
-        function renderExpertos() {
-            const container = document.getElementById('expertosContainer');
-            container.innerHTML = dataManager.expertos.map(experto => `
+        <!-- Rankings Section -->
+        <section id="rankings" class="section">
+            <div class="two-column">
                 <div class="card">
-                    <div class="card-header">${experto.nombre}</div>
-                    <div class="card-body">
-                        <p class="card-subtitle"><strong>${experto.especialidad}</strong></p>
-                        <p>${experto.experiencia} de experiencia</p>
-                        <p style="margin-top: 10px; font-size: 12px; color: var(--text-light);">
-                            <strong>Fechas Disponibles:</strong><br>
-                            ${experto.fechasDisponibles.join(', ')}
-                        </p>
-                        <p style="margin-top: 10px; font-size: 12px;"><strong>Email:</strong> ${experto.email}</p>
+                    <h2 class="card-title">🏆 Top Expertos</h2>
+                    <p style="color: var(--text-secondary); margin-bottom: 20px;">Expertos con más cursos impartidos</p>
+                    <ul class="ranking-list" id="topExpertsList"></ul>
+                </div>
+
+                <div class="card">
+                    <h2 class="card-title">⭐ Top Estudiantes</h2>
+                    <p style="color: var(--text-secondary); margin-bottom: 20px;">Personal con más cursos tomados</p>
+                    <ul class="ranking-list" id="topStudentsList"></ul>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // ============================================
+        // CONFIGURACIÓN - REEMPLAZA CON TU URL
+        // ============================================
+        const SCRIPT_URL = 'TU_URL_DE_GOOGLE_APPS_SCRIPT_AQUI';
+
+        // Verificar configuración al cargar
+        window.addEventListener('DOMContentLoaded', () => {
+            if (SCRIPT_URL === 'TU_URL_DE_GOOGLE_APPS_SCRIPT_AQUI') {
+                showAlert('⚠️ CONFIGURACIÓN PENDIENTE: Debes reemplazar SCRIPT_URL con tu URL de Google Apps Script desplegada', 'error');
+            }
+            loadDashboard();
+        });
+
+        // Variables globales
+        let currentMonth = new Date().getMonth();
+        let currentYear = new Date().getFullYear();
+
+        // ============================================
+        // NAVEGACIÓN
+        // ============================================
+        function showSection(sectionId) {
+            // Ocultar todas las secciones
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Remover active de todos los botones
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Mostrar sección seleccionada
+            document.getElementById(sectionId).classList.add('active');
+
+            // Activar botón correspondiente
+            event.target.classList.add('active');
+
+            // Cargar datos según la sección
+            switch(sectionId) {
+                case 'dashboard':
+                    loadDashboard();
+                    break;
+                case 'propose':
+                    loadProposedCourses();
+                    break;
+                case 'active':
+                    loadActiveCourses();
+                    break;
+                case 'experts':
+                    loadExperts();
+                    break;
+                case 'calendar':
+                    loadCalendar();
+                    break;
+                case 'rankings':
+                    loadRankings();
+                    break;
+            }
+        }
+
+        // ============================================
+        // API CALLS
+        // ============================================
+        async function apiCall(action, method = 'GET', data = null) {
+            try {
+                // Verificar que la URL esté configurada
+                if (SCRIPT_URL === 'https://script.google.com/macros/s/AKfycbwWSEy_LqQS-f-qK09c58n1ybRySeqCqXbe6HDH18se1XNf8vH-MjglqEndunVLy2kV/exec') {
+                    showAlert('Error: URL del script no configurada. Lee INSTRUCCIONES.md', 'error');
+                    return null;
+                }
+
+                const url = `${SCRIPT_URL}?action=${action}`;
+                const options = {
+                    method: method,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    mode: 'cors'
+                };
+
+                if (method === 'POST' && data) {
+                    options.body = JSON.stringify(data);
+                }
+
+                console.log('[v0] Llamando API:', action, method);
+                const response = await fetch(method === 'POST' ? `${SCRIPT_URL}?action=${action}` : url, options);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const result = await response.json();
+                console.log('[v0] Respuesta API:', result);
+                return result;
+            } catch (error) {
+                console.error('[v0] Error en API call:', error);
+                let errorMsg = 'Error de conexión con el servidor. ';
+                
+                if (error.message.includes('Failed to fetch')) {
+                    errorMsg += 'Verifica que: 1) El Apps Script esté desplegado como Web App, 2) Los permisos sean "Anyone", 3) La URL sea correcta';
+                } else if (error.message.includes('HTTP error')) {
+                    errorMsg += `Código de error: ${error.message}`;
+                } else {
+                    errorMsg += error.message;
+                }
+                
+                showAlert(errorMsg, 'error');
+                return null;
+            }
+        }
+
+        // ============================================
+        // DASHBOARD
+        // ============================================
+        async function loadDashboard() {
+            const stats = await apiCall('getStats');
+            if (stats) {
+                document.getElementById('statProposed').textContent = stats.cursosPropuestos;
+                document.getElementById('statActive').textContent = stats.cursosActivos;
+                document.getElementById('statRegistrations').textContent = stats.totalInscripciones;
+                document.getElementById('statExperts').textContent = stats.totalExpertos;
+            }
+
+            const courses = await apiCall('getActiveCourses');
+            if (courses) {
+                displayDashboardCourses(courses.slice(0, 5));
+            }
+        }
+
+        function displayDashboardCourses(courses) {
+            const container = document.getElementById('dashboardCourses');
+            if (courses.length === 0) {
+                container.innerHTML = '<p style="color: var(--text-secondary); text-align: center;">No hay cursos activos</p>';
+                return;
+            }
+
+            container.innerHTML = courses.map(course => `
+                <div class="course-item">
+                    <div class="course-header">
+                        <div class="course-title">${course.titulo}</div>
+                        <span class="course-badge badge-active">${course.estado}</span>
+                    </div>
+                    <div class="course-info">
+                        <p>👨‍🏫 <strong>Experto:</strong> ${course.experto}</p>
+                        <p>📅 <strong>Inicio:</strong> ${course.fechaInicio} | <strong>Fin:</strong> ${course.fechaFin}</p>
+                        <p>👥 <strong>Inscritos:</strong> ${course.inscritos}/${course.cupos}</p>
                     </div>
                 </div>
             `).join('');
         }
 
-        function renderTopParticipantes() {
-            const container = document.getElementById('topParticipantesContainer');
-            const top = dataManager.personas.sort((a, b) => b.cursosCompletados - a.cursosCompletados).slice(0, 3);
-            
-            container.innerHTML = top.map((persona, index) => {
-                const rankLabel = index === 0 ? '🥇 ORO' : index === 1 ? '🥈 PLATA' : '🥉 BRONCE';
-                return `
-                    <div class="trophy-card">
-                        <div class="trophy-rank">${rankLabel}</div>
-                        <div class="trophy-name">${persona.nombre}</div>
-                        <div class="trophy-courses"><strong>${persona.cursosCompletados}</strong> cursos completados</div>
-                    </div>
-                `;
-            }).join('');
-        }
-
-        function renderMisPostulaciones() {
-            const tbody = document.getElementById('tablaMisPostulaciones');
-            tbody.innerHTML = dataManager.postulaciones.map(post => `
-                <tr>
-                    <td>${post.cursoNombre}</td>
-                    <td>${post.nombre}</td>
-                    <td>${post.sap}</td>
-                    <td>${post.fecha}</td>
-                    <td><span class="badge badge-lime">Pendiente</span></td>
-                </tr>
-            `).join('');
-        }
-
-        function openCursoModal(cursoId) {
-            const curso = dataManager.cursos.find(c => c.id === cursoId);
-            if (!curso) return;
-
-            document.getElementById('cursoIdPostularse').value = cursoId;
-            document.getElementById('modalCursoTitulo').textContent = curso.nombre;
-            document.getElementById('modalCursoContenido').innerHTML = `
-                <p><strong>Descripción:</strong> ${curso.descripcion}</p>
-                <p><strong>Nivel:</strong> ${curso.nivel}</p>
-                <p><strong>Duración:</strong> ${curso.duracion} horas</p>
-                <p><strong>Área:</strong> ${curso.area}</p>
-            `;
-            openModal('modalCursoDetalles');
-        }
-
-        function handlePostularse() {
-            openModal('modalPostularse');
-            closeModal('modalCursoDetalles');
-        }
-
-        // ==================== EVENT LISTENERS ====================
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const sectionId = e.target.dataset.section;
-                showSection(sectionId);
-            });
-        });
-
-        // Agregar Curso Form
-        document.getElementById('formAgregarCurso').addEventListener('submit', (e) => {
+        // ============================================
+        // PROPONER CURSOS
+        // ============================================
+        document.getElementById('proposeCourseForm').addEventListener('submit', async (e) => {
             e.preventDefault();
-            const inputs = e.target.querySelectorAll('input, textarea, select');
-            const datos = {
-                nombre: inputs[0].value,
-                descripcion: inputs[1].value,
-                nivel: inputs[2].value,
-                duracion: inputs[3].value
+
+            const data = {
+                titulo: document.getElementById('courseTitle').value,
+                descripcion: document.getElementById('courseDescription').value,
+                categoria: document.getElementById('courseCategory').value,
+                duracion: document.getElementById('courseDuration').value
             };
-            dataManager.addCurso(datos);
-            e.target.reset();
-        });
 
-        // Proponer Curso Form
-        document.getElementById('formProponerCurso').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const inputs = e.target.querySelectorAll('input, textarea, select');
-            const datos = {
-                nombre: inputs[0].value,
-                sap: inputs[1].value,
-                cursoNombre: inputs[2].value,
-                descripcion: inputs[3].value,
-                nivel: inputs[4].value,
-                fecha: new Date().toISOString().split('T')[0]
-            };
-            dataManager.addPropostaCurso(datos);
-            e.target.reset();
-            showSection('home');
-        });
+            const result = await apiCall('proposeCourse', 'POST', data);
 
-        // Agregar Persona Form
-        document.getElementById('formAgregarPersona').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const inputs = e.target.querySelectorAll('input, select');
-            const datos = {
-                nombre: inputs[0].value,
-                sap: inputs[1].value,
-                area: inputs[2].value,
-                email: inputs[3].value,
-                cursosCompletados: 0
-            };
-            dataManager.addPersona(datos);
-            e.target.reset();
-            showSection('personas');
-        });
-
-        // Registro Experto Form
-        document.getElementById('formRegistroExperto').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const inputs = e.target.querySelectorAll('input, textarea');
-            const datos = {
-                nombre: inputs[0].value,
-                especialidad: inputs[1].value,
-                experiencia: inputs[2].value,
-                email: inputs[3].value,
-                fechasDisponibles: [inputs[4].value]
-            };
-            dataManager.addExperto(datos);
-            e.target.reset();
-            closeModal('modalExpertosRegistro');
-            showSection('expertos');
-        });
-
-        // Postularse Form
-        document.getElementById('formPostularse').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const cursoId = document.getElementById('cursoIdPostularse').value;
-            const curso = dataManager.cursos.find(c => c.id === parseInt(cursoId));
-            const inputs = e.target.querySelectorAll('input');
-            
-            const datos = {
-                cursoId: cursoId,
-                cursoNombre: curso.nombre,
-                nombre: inputs[0].value,
-                sap: inputs[1].value,
-                area: inputs[2].value,
-                fecha: new Date().toISOString().split('T')[0]
-            };
-            
-            dataManager.addPostulacion(datos);
-            e.target.reset();
-            closeModal('modalPostularse');
-        });
-
-        // Search functionality
-        document.getElementById('searchBox').addEventListener('input', (e) => {
-            const query = e.target.value.toLowerCase();
-            // Implement search logic based on current section
-        });
-
-        // Close modals on outside click
-        window.addEventListener('click', (e) => {
-            if (e.target.classList.contains('modal')) {
-                e.target.classList.remove('active');
+            if (result && result.success) {
+                showAlert('¡Curso propuesto exitosamente!', 'success');
+                e.target.reset();
+                loadProposedCourses();
+            } else {
+                showAlert('Error al proponer el curso', 'error');
             }
         });
 
-        // Initial render
-        showSection('home');
+        async function loadProposedCourses() {
+            const courses = await apiCall('getProposedCourses');
+            if (courses) {
+                displayProposedCourses(courses);
+            }
+        }
+
+        function displayProposedCourses(courses) {
+            const container = document.getElementById('proposedCoursesList');
+            if (courses.length === 0) {
+                container.innerHTML = '<p style="color: var(--text-secondary); text-align: center;">No hay cursos propuestos</p>';
+                return;
+            }
+
+            container.innerHTML = `
+                <div class="course-list">
+                    ${courses.map(course => `
+                        <div class="course-item">
+                            <div class="course-header">
+                                <div class="course-title">${course.titulo}</div>
+                                <span class="course-badge ${course.estado === 'Pendiente' ? 'badge-pending' : 'badge-active'}">
+                                    ${course.estado}
+                                </span>
+                            </div>
+                            <div class="course-info">
+                                <p><strong>Categoría:</strong> ${course.categoria}</p>
+                                <p><strong>Duración:</strong> ${course.duracion} horas</p>
+                                <p><strong>Descripción:</strong> ${course.descripcion}</p>
+                                ${course.expertoAsignado ? `<p><strong>Experto:</strong> ${course.expertoAsignado}</p>` : ''}
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        // ============================================
+        // CURSOS ACTIVOS E INSCRIPCIÓN
+        // ============================================
+        async function loadActiveCourses() {
+            const courses = await apiCall('getActiveCourses');
+            if (courses) {
+                displayActiveCourses(courses);
+            }
+        }
+
+        function displayActiveCourses(courses) {
+            const container = document.getElementById('activeCoursesList');
+            if (courses.length === 0) {
+                container.innerHTML = '<p style="color: var(--text-secondary); text-align: center;">No hay cursos activos para inscripción</p>';
+                return;
+            }
+
+            container.innerHTML = courses.map(course => `
+                <div class="course-item">
+                    <div class="course-header">
+                        <div class="course-title">${course.titulo}</div>
+                        <span class="course-badge badge-active">${course.estado}</span>
+                    </div>
+                    <div class="course-info">
+                        <p>👨‍🏫 <strong>Experto:</strong> ${course.experto}</p>
+                        <p>📅 <strong>Inicio:</strong> ${course.fechaInicio} | <strong>Fin:</strong> ${course.fechaFin}</p>
+                        <p>👥 <strong>Cupos disponibles:</strong> ${course.cupos - course.inscritos}/${course.cupos}</p>
+                    </div>
+                    ${course.cupos > course.inscritos ? `
+                        <button class="btn btn-success" onclick="showRegistrationForm('${course.id}', '${course.titulo}')">
+                            Inscribirme
+                        </button>
+                    ` : '<p style="color: var(--error); font-weight: 600;">Sin cupos disponibles</p>'}
+                </div>
+            `).join('');
+        }
+
+        function showRegistrationForm(courseId, courseTitle) {
+            const nombre = prompt(`Inscripción a: ${courseTitle}\n\nIngresa tu nombre completo:`);
+            if (!nombre) return;
+
+            const sap = prompt('Ingresa tu número SAP:');
+            if (!sap) return;
+
+            registerForCourse(courseId, nombre, sap);
+        }
+
+        async function registerForCourse(courseId, nombre, sap) {
+            const data = {
+                idCurso: courseId,
+                nombre: nombre,
+                sap: sap
+            };
+
+            const result = await apiCall('registerForCourse', 'POST', data);
+
+            if (result && result.success) {
+                showAlert('¡Inscripción exitosa!', 'success');
+                loadActiveCourses();
+            } else {
+                showAlert(result?.error || 'Error al inscribirse', 'error');
+            }
+        }
+
+        // ============================================
+        // EXPERTOS
+        // ============================================
+        document.getElementById('createExpertForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const data = {
+                nombre: document.getElementById('expertName').value,
+                sap: document.getElementById('expertSAP').value,
+                email: document.getElementById('expertEmail').value,
+                especialidad: document.getElementById('expertSpecialty').value
+            };
+
+            const result = await apiCall('createExpert', 'POST', data);
+
+            if (result && result.success) {
+                showAlert('¡Experto registrado exitosamente!', 'success');
+                e.target.reset();
+                loadExperts();
+            } else {
+                showAlert('Error al registrar experto', 'error');
+            }
+        });
+
+        async function loadExperts() {
+            const experts = await apiCall('getExperts');
+            if (experts) {
+                displayExperts(experts);
+            }
+        }
+
+        function displayExperts(experts) {
+            const tbody = document.getElementById('expertsTableBody');
+            if (experts.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" style="text-align: center; color: var(--text-secondary);">No hay expertos registrados</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = experts.map(expert => `
+                <tr>
+                    <td><strong>${expert.nombre}</strong></td>
+                    <td>${expert.sap}</td>
+                    <td>${expert.especialidad}</td>
+                    <td>${expert.cursosImpartidos}</td>
+                    <td>
+                        <span class="course-badge ${expert.disponible === 'Sí' ? 'badge-active' : 'badge-pending'}">
+                            ${expert.disponible === 'Sí' ? 'Disponible' : 'No disponible'}
+                        </span>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // ============================================
+        // CALENDARIO
+        // ============================================
+        async function loadCalendar() {
+            renderCalendar();
+            const schedules = await apiCall('getSchedules');
+            if (schedules) {
+                displayCalendarEvents(schedules);
+            }
+        }
+
+        function renderCalendar() {
+            const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+            const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+
+            const monthNames = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+                              'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+
+            document.getElementById('calendarMonth').textContent = `${monthNames[currentMonth]} ${currentYear}`;
+
+            const grid = document.getElementById('calendarGrid');
+            grid.innerHTML = '';
+
+            // Días de la semana
+            ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'].forEach(day => {
+                const dayHeader = document.createElement('div');
+                dayHeader.textContent = day;
+                dayHeader.style.fontWeight = '600';
+                dayHeader.style.textAlign = 'center';
+                dayHeader.style.padding = '10px';
+                dayHeader.style.color = 'var(--primary)';
+                grid.appendChild(dayHeader);
+            });
+
+            // Espacios en blanco antes del primer día
+            for (let i = 0; i < firstDay; i++) {
+                const emptyDay = document.createElement('div');
+                grid.appendChild(emptyDay);
+            }
+
+            // Días del mes
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day';
+                dayElement.textContent = day;
+
+                // Marcar día actual
+                const today = new Date();
+                if (day === today.getDate() && currentMonth === today.getMonth() && currentYear === today.getFullYear()) {
+                    dayElement.style.background = 'var(--secondary)';
+                    dayElement.style.color = 'white';
+                }
+
+                grid.appendChild(dayElement);
+            }
+        }
+
+        function changeMonth(direction) {
+            currentMonth += direction;
+            if (currentMonth > 11) {
+                currentMonth = 0;
+                currentYear++;
+            } else if (currentMonth < 0) {
+                currentMonth = 11;
+                currentYear--;
+            }
+            loadCalendar();
+        }
+
+        function displayCalendarEvents(schedules) {
+            const container = document.getElementById('calendarEvents');
+            if (schedules.length === 0) {
+                container.innerHTML = '<p style="color: var(--text-secondary); text-align: center;">No hay eventos programados</p>';
+                return;
+            }
+
+            container.innerHTML = `
+                <div class="card">
+                    <h3 class="card-title">📋 Eventos Programados</h3>
+                    <div class="table-container">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Horario</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${schedules.map(schedule => `
+                                    <tr>
+                                        <td>${schedule.fecha}</td>
+                                        <td>${schedule.horaInicio} - ${schedule.horaFin}</td>
+                                        <td>
+                                            <span class="course-badge badge-active">${schedule.estado}</span>
+                                        </td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `;
+        }
+
+        // ============================================
+        // RANKINGS
+        // ============================================
+        async function loadRankings() {
+            const topExperts = await apiCall('getTopExperts');
+            const topStudents = await apiCall('getTopStudents');
+
+            if (topExperts) displayTopExperts(topExperts);
+            if (topStudents) displayTopStudents(topStudents);
+        }
+
+        function displayTopExperts(experts) {
+            const container = document.getElementById('topExpertsList');
+            if (experts.length === 0) {
+                container.innerHTML = '<p style="color: var(--text-secondary); text-align: center;">No hay datos disponibles</p>';
+                return;
+            }
+
+            container.innerHTML = experts.map((expert, index) => `
+                <li class="ranking-item">
+                    <div class="ranking-position">${index + 1}</div>
+                    <div class="ranking-info">
+                        <div class="ranking-name">${expert.nombre}</div>
+                        <div class="ranking-count">${expert.cursosImpartidos} cursos impartidos • ${expert.especialidad}</div>
+                    </div>
+                </li>
+            `).join('');
+        }
+
+        function displayTopStudents(students) {
+            const container = document.getElementById('topStudentsList');
+            if (students.length === 0) {
+                container.innerHTML = '<p style="color: var(--text-secondary); text-align: center;">No hay datos disponibles</p>';
+                return;
+            }
+
+            container.innerHTML = students.map((student, index) => `
+                <li class="ranking-item">
+                    <div class="ranking-position">${index + 1}</div>
+                    <div class="ranking-info">
+                        <div class="ranking-name">${student.nombre}</div>
+                        <div class="ranking-count">${student.cursosTomados} cursos tomados • SAP: ${student.sap}</div>
+                    </div>
+                </li>
+            `).join('');
+        }
+
+        // ============================================
+        // UTILIDADES
+        // ============================================
+        function showAlert(message, type) {
+            const alertId = type === 'success' ? 'alertSuccess' : 'alertError';
+            const alert = document.getElementById(alertId);
+            alert.textContent = message;
+            alert.classList.add('show');
+
+            setTimeout(() => {
+                alert.classList.remove('show');
+            }, 5000);
+        }
+
+        // ============================================
+        // INICIALIZACIÓN
+        // ============================================
+        window.addEventListener('load', () => {
+            loadDashboard();
+        });
     </script>
 </body>
 </html>
